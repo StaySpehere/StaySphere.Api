@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaySphere.Api", "StaySphere.Api\StaySphere.Api.csproj", "{6DD7C027-4B70-484F-A70D-44E581C70290}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DD7C027-4B70-484F-A70D-44E581C70290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD7C027-4B70-484F-A70D-44E581C70290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD7C027-4B70-484F-A70D-44E581C70290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD7C027-4B70-484F-A70D-44E581C70290}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C44C198-F3DD-4B35-BABF-240843FD736A}
+	EndGlobalSection
+EndGlobal

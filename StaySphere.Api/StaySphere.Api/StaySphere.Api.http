@@ -1,0 +1,6 @@
+@StaySphere.Api_HostAddress = http://localhost:5128
+
+GET {{StaySphere.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
