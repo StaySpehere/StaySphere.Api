@@ -8,5 +8,6 @@ namespace StaySphere.Domain.Entities
         public int Floor { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
     }
 }

@@ -8,5 +8,6 @@ namespace StaySphere.Domain.Entities
         public int PhoneNumber  { get; set; }
         public string Email { get; set; }
         public Document Document { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
     }
 }

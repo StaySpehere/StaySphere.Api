@@ -9,5 +9,6 @@ namespace StaySphere.Domain.Entities
         public string LastName { get; set; }
         public DateTime BrithDate { get; set; }
         public string Gender { get; set; }
+        public virtual ICollection<Guest> Guests { get; set; }
     }
 }

@@ -6,5 +6,6 @@ namespace StaySphere.Domain.Entities
     {
         public string Name { get; set; }
         public decimal Salary { get; set; }
+        public virtual ICollection<Employee> Employees { get; set;}
     }
 }
