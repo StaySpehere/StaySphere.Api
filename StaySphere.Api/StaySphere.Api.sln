@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaySphere.Api", "StaySphere.Api\StaySphere.Api.csproj", "{6DD7C027-4B70-484F-A70D-44E581C70290}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaySphere.Domain", "StaySphere.Domain\StaySphere.Domain.csproj", "{0CE54295-C9E8-4E97-9905-0257396CB066}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaySphere.Domain", "StaySphere.Domain\StaySphere.Domain.csproj", "{0CE54295-C9E8-4E97-9905-0257396CB066}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaySphere.Services", "StaySphere.Services\StaySphere.Services.csproj", "{7E6B1306-28F2-4B92-8EC7-A6C0D341CC62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0CE54295-C9E8-4E97-9905-0257396CB066}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CE54295-C9E8-4E97-9905-0257396CB066}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CE54295-C9E8-4E97-9905-0257396CB066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E6B1306-28F2-4B92-8EC7-A6C0D341CC62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E6B1306-28F2-4B92-8EC7-A6C0D341CC62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E6B1306-28F2-4B92-8EC7-A6C0D341CC62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E6B1306-28F2-4B92-8EC7-A6C0D341CC62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
