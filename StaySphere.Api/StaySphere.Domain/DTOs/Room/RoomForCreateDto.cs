@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Room
 {
-    internal class RoomForCreateDto
-    {
-    }
+    public record RoomForCreateDto(
+        int CategoryId,
+        int Number,
+        int Floor);
+   
 }

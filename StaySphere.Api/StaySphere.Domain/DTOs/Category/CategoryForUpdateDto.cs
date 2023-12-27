@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Category
 {
-    internal class CategoryForUpdateDto
-    {
-    }
+    public record CategoryForUpdateDto(
+        int Id,
+        string Name);
 }

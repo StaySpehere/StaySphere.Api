@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Position
 {
-    internal class PositionForCreateDto
-    {
-    }
+    public class PositionForCreateDto(string Name, decimal Salary);
+   
 }

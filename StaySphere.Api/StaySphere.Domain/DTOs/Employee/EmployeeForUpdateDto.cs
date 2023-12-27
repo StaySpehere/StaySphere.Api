@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Employee
 {
-    internal class EmployeeForUpdateDto
-    {
-    }
+    public record EmployeeForUpdateDto(
+        int Id,
+        string FirstName,
+        int PositionId,
+        decimal Salary);
+   
 }

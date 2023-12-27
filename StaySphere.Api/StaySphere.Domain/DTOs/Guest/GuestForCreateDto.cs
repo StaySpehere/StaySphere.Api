@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Guest
 {
-    internal class GuestForCreateDto
-    {
-    }
+    public record GuestForCreateDto(int DocumentId)
+
+
+
+
 }

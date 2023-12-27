@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Booking
 {
-    internal class BookingForCreateDto
-    {
-    }
+    public record BookingForCreateDto(
+        int GuestId,
+        int EmployeeId,
+        int RoomId);
+
+
 }

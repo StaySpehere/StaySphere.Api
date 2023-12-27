@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Document
 {
-    internal class DocumentForCreateDto
-    {
-    }
+    public record DocumentForCreateDto(string FirstName,string Gender,int SerialNumber);
+   
 }

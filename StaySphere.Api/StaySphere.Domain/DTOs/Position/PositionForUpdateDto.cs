@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Position
 {
-    internal class PositionForUpdateDto
-    {
-    }
+   public record PositionForUpdateDto(
+       int Id,
+       string Name,
+       decimal Salary);
+    
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Review
 {
-    internal class ReviewForCreateDto
-    {
-    }
+    public record ReviewForCreateDto(int BookingId, string Comment);
+    
+    
 }

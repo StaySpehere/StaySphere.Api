@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace StaySphere.Domain.DTOs.Document
 {
-    internal class DocumentForUpdateDto
-    {
-    }
+    public record DocumentForUpdateDto(
+        int Id,
+        string FirstName,
+        int SerialNumber,
+        string Gender);
+    
 }
