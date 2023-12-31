@@ -8,8 +8,9 @@ namespace StaySphere.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.ToTable("Category")
-                .HasKey(c => c.Id);
+            builder.ToTable("Category");
+            builder.HasKey(c => c.Id);
+               
 
             builder.HasMany(c => c.Rooms)
                 .WithOne(r => r.Category)
