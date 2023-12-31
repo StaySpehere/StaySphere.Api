@@ -20,7 +20,6 @@ namespace StaySphere.Infrastructure.Persistence.Configurations
                 .HasMaxLength(255);
             builder.Property(c => c.Price)
                 .HasColumnType("money");
-
         }
     }
 }

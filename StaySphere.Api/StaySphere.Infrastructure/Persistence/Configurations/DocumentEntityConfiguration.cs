@@ -24,9 +24,6 @@ namespace StaySphere.Infrastructure.Persistence.Configurations
                 .HasColumnType("date");
             builder.Property(d => d.Gender)
                 .HasMaxLength(255);
-
-
-
         }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using StaySphere.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StaySphere.Infrastructure.Persistence.Configurations
 {
@@ -19,9 +14,9 @@ namespace StaySphere.Infrastructure.Persistence.Configurations
             builder.HasMany(e => e.Bookings)
                 .WithOne(b => b.Employee)
                 .HasForeignKey(b => b.EmployeeId);
-            builder.HasOne(e =>e.Position)
-                .WithMany(p =>p.Employees)
-                .HasForeignKey(e =>e.PositionId);
+            builder.HasOne(e => e.Position)
+                .WithMany(p => p.Employees)
+                .HasForeignKey(e => e.PositionId);
 
             builder.Property(e => e.FirstName)
                 .HasMaxLength(255);
