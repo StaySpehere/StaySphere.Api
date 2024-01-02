@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage;
 using StaySphere.Domain.Entities;
 
 namespace StaySphere.Infrastructure.Persistence.Configurations

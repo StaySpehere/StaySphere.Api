@@ -4,5 +4,4 @@
         int Id,
         int BookingId,
         string Comment);
-
 }

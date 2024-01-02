@@ -4,5 +4,4 @@
         int GuestId,
         int EmployeeId,
         int RoomId);
-
 }

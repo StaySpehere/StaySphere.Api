@@ -4,5 +4,4 @@
        int Id,
        string Name,
        decimal Salary);
-
 }
