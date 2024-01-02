@@ -15,6 +15,5 @@ namespace StaySphere.Domain.DTOs.Booking
         public DateTime StayDuration { get; set; }
         public decimal TotalPrice { get; set; }
         public ICollection<ReviewDto> Reviews { get; set; }
-
     }
 }

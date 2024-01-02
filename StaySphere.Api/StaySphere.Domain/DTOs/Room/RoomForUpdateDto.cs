@@ -5,5 +5,4 @@
         int CategoryId,
         int Number,
         int Floor);
-
 }

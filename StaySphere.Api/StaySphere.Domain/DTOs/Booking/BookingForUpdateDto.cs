@@ -4,6 +4,5 @@
         int Id,
         int GuestId,
         int EmployeeId,
-        int RoomId);
-    
+        int RoomId);   
 }
