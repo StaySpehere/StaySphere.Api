@@ -4,9 +4,9 @@ namespace StaySphere.Domain.Entities
 {
     public class Booking : EntityBase
     {
-        public DateTime Check_In_Data { get; set; }
-        public DateTime Check_Out_Data { get; set; }
-        public decimal Total_Price { get; set; }
+        public DateTime CheckInData { get; set; }
+        public DateTime CheckOutData { get; set; }
+        public decimal TotalPrice { get; set; }
         public int GuestId { get; set; }
         public Guest Guest { get; set; }
         public int EmployeeId { get; set; }
