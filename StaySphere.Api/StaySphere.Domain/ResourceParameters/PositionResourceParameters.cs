@@ -4,6 +4,7 @@ namespace StaySphere.Domain.ResourceParameters
 {
     public class PositionResourceParameters : ResourceParametersBase
     {
+        public string OrderBy { get; set; } = "name";
         public decimal? Salary { get; set; }
         public decimal? SalaryLessThan { get; set; }
         public decimal? SalaryGreaterThan { get; set; }
