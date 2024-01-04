@@ -5,8 +5,6 @@
         public virtual int MaxPageSize { get; set; } = 25;
 
         public virtual string? SearchString { get; set; }
-        public virtual string OrderBy { get; set; } = "name";
-
         public int PageNumber { get; set; } = 1;
 
         private int _pageSize = 15;
