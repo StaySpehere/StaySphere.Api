@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Employee;
-using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace StaySphere.Api.Controllers
 {
@@ -57,7 +54,7 @@ namespace StaySphere.Api.Controllers
         public ActionResult Delete(int id)
         {
             _employeeService.DeleteEmployee(id);
-         
+
             return NoContent();
         }
     }

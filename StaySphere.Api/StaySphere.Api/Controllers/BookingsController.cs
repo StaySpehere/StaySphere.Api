@@ -18,7 +18,7 @@ namespace StaySphere.Api.Controllers
         public ActionResult<IEnumerable<BookingDto>> Get()
         {
             var customers = _bookingService.GetBookings();
-            
+
             return Ok(customers);
         }
 
@@ -26,7 +26,7 @@ namespace StaySphere.Api.Controllers
         public ActionResult<BookingDto> Get(int id)
         {
             var booking = _bookingService.GetBookingById(id);
-           
+
             return Ok(booking);
         }
 
@@ -34,7 +34,7 @@ namespace StaySphere.Api.Controllers
         public ActionResult Post(BookingForCreateDto booking)
         {
             _bookingService.CreateBooking(booking);
-          
+
             return StatusCode(201);
         }
 
@@ -56,7 +56,7 @@ namespace StaySphere.Api.Controllers
         public ActionResult Delete(int id)
         {
             _bookingService.DeleteBooking(id);
-          
+
             return NoContent();
         }
     }
