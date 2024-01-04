@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.DTOs.Category;
+using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
 
 
@@ -20,6 +21,7 @@ namespace StaySphere.Api.Controllers
         public ActionResult<IEnumerable<CategoryDto>> Get() 
         {
            var categories = _categoryService.GetCategories();
+           
            return Ok(categories);
         }
 
@@ -27,25 +29,36 @@ namespace StaySphere.Api.Controllers
         public ActionResult<CategoryDto> Get(int id)
         {
            var category = _categoryService.GetCategoryById(id);
+          
            return Ok(category);
         }
 
-        // POST api/<CategoriesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] CategoryForCreateDto category)
         {
+            _categoryService.CreateCategory(category);
+          
+            return StatusCode(201);
         }
 
-        // PUT api/<CategoriesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] CategoryForUpdateDto category)
         {
+            if(id != category.Id)
+            {
+                return BadRequest($"Route id: {id} does not match with parameter id: {category.Id}.");
+            }
+            _categoryService.UpdateCategory(category);
+         
+            return NoContent();
         }
 
-        // DELETE api/<CategoriesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _categoryService.DeleteCategory(id);
+          
+            return NoContent();
         }
     }
 }
