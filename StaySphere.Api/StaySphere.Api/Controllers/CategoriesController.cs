@@ -1,18 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StaySphere.Domain.DTOs.Category;
+using StaySphere.Domain.Interfaces.Services;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace StaySphere.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        // GET: api/<CategoriesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ICategoryService _categoryService;
+        public CategoriesController(ICategoryService categoryService)
         {
-            return new string[] { "value1", "value2" };
+            _categoryService = categoryService;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<CategoryDto>> Get() 
+        {
+           var categories = _categoryService.GetCategories();
+           return Ok(categories);
         }
 
         // GET api/<CategoriesController>/5
