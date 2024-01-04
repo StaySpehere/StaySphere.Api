@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.Interfaces.Services;
 
@@ -22,11 +23,11 @@ namespace StaySphere.Api.Controllers
            return Ok(categories);
         }
 
-        // GET api/<CategoriesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetCategoryById")]
+        public ActionResult<CategoryDto> Get(int id)
         {
-            return "value";
+           var category = _categoryService.GetCategoryById(id);
+           return Ok(category);
         }
 
         // POST api/<CategoriesController>
