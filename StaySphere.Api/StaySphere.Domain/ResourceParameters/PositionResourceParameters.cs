@@ -9,6 +9,5 @@ namespace StaySphere.Domain.ResourceParameters
         public decimal? SalaryLessThan { get; set; }
         public decimal? SalaryGreaterThan { get; set; }
         public override int MaxPageSize { get; set; } = 30;
-
     }
 }
