@@ -1,7 +1,6 @@
 ﻿using Bogus;
-using System.Reflection.Metadata;
-using StaySphere.Infrastructure.Persistence;
 using StaySphere.Domain.Entities;
+using StaySphere.Infrastructure.Persistence;
 
 namespace StaySphere.Api.Extensions
 {
