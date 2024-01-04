@@ -1,8 +1,8 @@
 ﻿namespace StaySphere.Domain.Resource
 {
-    public abstract class ResourceParametersBase
+    public class ResourceParametersBase
     {
-        protected virtual int MaxPageSize { get; set; } = 25;
+        public virtual int MaxPageSize { get; set; } = 25;
 
         public virtual string? SearchString { get; set; }
         public virtual string OrderBy { get; set; } = "name";
