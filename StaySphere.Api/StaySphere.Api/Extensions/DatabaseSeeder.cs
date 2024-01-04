@@ -10,17 +10,17 @@ namespace StaySphere.Api.Extensions
 
         public static void SeedData(StaySphereDbContext context)
         {
-            SeedEmployees(context);
-            SeedDocuments(context);
-            SeedCategories(context);
-            SeedRooms(context);
-            SeedGuests(context);
-            SeedBookings(context);
-            SeedReviews(context);
-            SeedPositions(context);
+            CreatEmployees(context);
+            CreatDocuments(context);
+            CreatCategories(context);
+            CreatRooms(context);
+            CreatGuests(context);
+            CreatBookings(context);
+            CreatReviews(context);
+            CreatPositions(context);
         }
 
-        private static void SeedEmployees(StaySphereDbContext context)
+        private static void CreatEmployees(StaySphereDbContext context)
         {
             if (context.Employees.Any()) return;
 
@@ -54,7 +54,7 @@ namespace StaySphere.Api.Extensions
             context.SaveChanges();
         }
 
-        private static void SeedDocuments(StaySphereDbContext context)
+        private static void CreatDocuments(StaySphereDbContext context)
         {
             if (context.Documents.Any()) return;
 
@@ -75,7 +75,7 @@ namespace StaySphere.Api.Extensions
             context.SaveChanges();
         }
 
-        public static void SeedCategories(StaySphereDbContext context)
+        public static void CreatCategories(StaySphereDbContext context)
         {
             if (context.Categories.Any()) return;
 
@@ -93,7 +93,7 @@ namespace StaySphere.Api.Extensions
             context.SaveChanges();
         }
 
-        public static void SeedRooms(StaySphereDbContext context)
+        public static void CreatRooms(StaySphereDbContext context)
         {
             if (context.Rooms.Any()) return;
 
@@ -113,7 +113,7 @@ namespace StaySphere.Api.Extensions
             context.SaveChanges();
         }
 
-        public static void SeedGuests(StaySphereDbContext context)
+        public static void CreatGuests(StaySphereDbContext context)
         {
             if (context.Guests.Any()) return;
 
@@ -133,7 +133,7 @@ namespace StaySphere.Api.Extensions
             context.SaveChanges();
         }
 
-        public static void SeedBookings(StaySphereDbContext context)
+        public static void CreatBookings(StaySphereDbContext context)
         {
             if (context.Bookings.Any()) return;
 
@@ -158,7 +158,7 @@ namespace StaySphere.Api.Extensions
             context.SaveChanges();
         }
 
-        public static void SeedReviews(StaySphereDbContext context)
+        public static void CreatReviews(StaySphereDbContext context)
         {
             if (context.Reviews.Any()) return;
 
@@ -178,7 +178,7 @@ namespace StaySphere.Api.Extensions
             context.SaveChanges();
         }
 
-        public static void SeedPositions(StaySphereDbContext context)
+        public static void CreatPositions(StaySphereDbContext context)
         {
             if (context.Positions.Any()) return;
 
