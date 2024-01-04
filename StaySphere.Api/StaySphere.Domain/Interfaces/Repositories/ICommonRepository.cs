@@ -1,5 +1,5 @@
 ﻿
-namespace StaySphere.Domain.Enterfaces.Repositories
+namespace StaySphere.Domain.Interfaces.Repositories
 {
     public interface ICommonRepository
     {

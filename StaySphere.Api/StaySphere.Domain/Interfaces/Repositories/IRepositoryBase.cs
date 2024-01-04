@@ -1,6 +1,6 @@
 ﻿using StaySphere.Domain.Common;
 
-namespace StaySphere.Domain.Enterfaces.Repositories
+namespace StaySphere.Domain.Interfaces.Repositories
 {
     public interface IRepositoryBase<T> where T : EntityBase
     {

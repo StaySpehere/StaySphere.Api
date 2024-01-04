@@ -1,6 +1,6 @@
 ﻿using StaySphere.Domain.DTOs.Booking;
 
-namespace StaySphere.Domain.Enterfaces.Services
+namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IBookingService
     {
