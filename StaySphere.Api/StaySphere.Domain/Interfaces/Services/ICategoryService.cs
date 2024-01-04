@@ -1,6 +1,6 @@
 ﻿using StaySphere.Domain.DTOs.Category;
 
-namespace StaySphere.Domain.Enterfaces.Services
+namespace StaySphere.Domain.Interfaces.Services
 {
     internal interface ICategoryService
     {
