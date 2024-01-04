@@ -1,4 +1,5 @@
-﻿using StaySphere.Domain.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using StaySphere.Domain.Common;
 
 namespace StaySphere.Domain.Pagination
 {
