@@ -4,10 +4,10 @@ namespace StaySphere.Domain.Enterfaces.Services
 {
     public interface IEmployeeService
     {
-        EmployeeDto GetEmployees();
-        EmployeeDto? GetEmployeeById(int id);
-        EmployeeDto CreateEmployee(EmployeeForCreateDto employeeForCreateDto);
-        void UpdateEmployee(EmployeeForUpdateDto employeeForUpdateDto);
-        void DeleteEmployee(int id);
+        Task<EmployeeDto> GetEmployees();
+        Task<EmployeeDto?> GetEmployeeById(int id);
+        Task<EmployeeDto> CreateEmployee(EmployeeForCreateDto employeeForCreateDto);
+        Task UpdateEmployee(EmployeeForUpdateDto employeeForUpdateDto);
+        Task DeleteEmployee(int id);
     }
 }

@@ -4,10 +4,10 @@ namespace StaySphere.Domain.Enterfaces.Services
 {
     public interface IPositionService
     {
-        PositionDto GetPositions();
-        PositionDto? GetPositionById(int id);
-        PositionDto CreatePosition(PositionForCreateDto positionForCreateDto);
-        void UpdatePosition(PositionForUpdateDto positionForUpdateDto);
-        void DeletePosition(int id);
+        Task<PositionDto> GetPositions();
+        Task<PositionDto?> GetPositionById(int id);
+        Task<PositionDto> CreatePosition(PositionForCreateDto positionForCreateDto);
+        Task UpdatePosition(PositionForUpdateDto positionForUpdateDto);
+        Task DeletePosition(int id);
     }
 }

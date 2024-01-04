@@ -4,10 +4,10 @@ namespace StaySphere.Domain.Enterfaces.Repositories
 {
     public interface IRepositoryBase<T> where T : EntityBase
     {
-        IEnumerable<T> GetAll();
-        T FindById(int id);
-        T Create(T entity);
-        void Update(T entity);
-        void Delete(T entity);  
+        Task<IEnumerable<T>> GetAll();
+        Task<T> FindById(int id);
+        Task<T> Create(T entity);
+        Task Update(T entity);
+        Task Delete(T entity);  
     }
 }

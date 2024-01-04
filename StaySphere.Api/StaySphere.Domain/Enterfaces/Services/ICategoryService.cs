@@ -4,10 +4,10 @@ namespace StaySphere.Domain.Enterfaces.Services
 {
     internal interface ICategoryService
     {
-        CategoryDto GetCategories();
-        CategoryDto? GetCategoryById(int id);
-        CategoryDto CreateCategory(CategoryForCreateDto categoryForCreateDto);
-        void UpdateCategory(CategoryForUpdateDto categoryForUpdateDto);
-        void DeleteCategory(int id);
+        Task<CategoryDto> GetCategories();
+        Task<CategoryDto?> GetCategoryById(int id);
+        Task<CategoryDto> CreateCategory(CategoryForCreateDto categoryForCreateDto);
+        Task UpdateCategory(CategoryForUpdateDto categoryForUpdateDto);
+        Task DeleteCategory(int id);
     }
 }

@@ -4,10 +4,10 @@ namespace StaySphere.Domain.Enterfaces.Services
 {
     public interface IDocumentService
     {
-        DocumentDto GetDocuments();
-        DocumentDto? GetDocumentById(int id);
-        DocumentDto CreateDocument(DocumentForCreateDto documentForCreateDto);
-        void UpdateDocument(DocumentForUpdateDto documentForUpdateDto);
-        void DeleteDocument(int id);
+        Task<DocumentDto> GetDocuments();
+        Task<DocumentDto?> GetDocumentById(int id);
+        Task<DocumentDto> CreateDocument(DocumentForCreateDto documentForCreateDto);
+        Task UpdateDocument(DocumentForUpdateDto documentForUpdateDto);
+        Task DeleteDocument(int id);
     }
 }
