@@ -1,43 +1,64 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StaySphere.Domain.DTOs.Employee;
+using StaySphere.Domain.Entities;
+using StaySphere.Domain.Interfaces.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace StaySphere.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/employees")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        // GET: api/<EmployeesController>
+        public IEmployeeService _employeeService;
+        public EmployeesController(IEmployeeService employeeService)
+        {
+            _employeeService = employeeService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<EmployeeDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var employees = _employeeService.GetEmployees();
+
+            return Ok(employees);
         }
 
-        // GET api/<EmployeesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetEmployeeById")]
+        public ActionResult<EmployeeDto> Get(int id)
         {
-            return "value";
+            var employee = _employeeService.GetEmployeeById(id);
+
+            return Ok(employee);
         }
 
-        // POST api/<EmployeesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] EmployeeForCreateDto employee)
         {
+            _employeeService.CreateEmployee(employee);
+
+            return StatusCode(201);
         }
 
-        // PUT api/<EmployeesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, EmployeeForUpdateDto employee)
         {
+            if (id != employee.Id)
+            {
+                return BadRequest($"Route id: {id} does not match with parameter id: {employee.Id}.");
+            }
+            _employeeService.UpdateEmployee(employee);
+
+            return NoContent();
         }
 
-        // DELETE api/<EmployeesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _employeeService.DeleteEmployee(id);
+         
+            return NoContent();
         }
     }
 }
