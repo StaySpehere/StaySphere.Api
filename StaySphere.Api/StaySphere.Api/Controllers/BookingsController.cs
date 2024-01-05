@@ -1,43 +1,63 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using StaySphere.Domain.DTOs.Booking;
+using StaySphere.Domain.Interfaces.Services;
 
 namespace StaySphere.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/booking")]
     [ApiController]
     public class BookingController : ControllerBase
     {
-        // GET: api/<BookingController>
+        private readonly IBookingService _bookingService;
+        public BookingController(IBookingService bookingService)
+        {
+            _bookingService = bookingService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<BookingDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var customers = _bookingService.GetBookings();
+
+            return Ok(customers);
         }
 
-        // GET api/<BookingController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetBookingById")]
+        public ActionResult<BookingDto> Get(int id)
         {
-            return "value";
+            var booking = _bookingService.GetBookingById(id);
+
+            return Ok(booking);
         }
 
-        // POST api/<BookingController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post(BookingForCreateDto booking)
         {
+            _bookingService.CreateBooking(booking);
+
+            return StatusCode(201);
         }
 
-        // PUT api/<BookingController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] BookingForUpdateDto booking)
         {
+            if (id != booking.Id)
+            {
+                return BadRequest(
+                    $"Route id: {id} does not match with parameter id: {booking.Id}.");
+            }
+
+            _bookingService.UpdateBooking(booking);
+
+            return NoContent();
         }
 
-        // DELETE api/<BookingController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _bookingService.DeleteBooking(id);
+
+            return NoContent();
         }
     }
 }

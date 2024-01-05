@@ -1,43 +1,61 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using StaySphere.Domain.DTOs.Position;
+using StaySphere.Domain.Interfaces.Services;
 
 namespace StaySphere.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/positions")]
     [ApiController]
     public class PositionsController : ControllerBase
     {
-        // GET: api/<PositionsController>
+        public IPositionService _positionService;
+        public PositionsController(IPositionService positionService)
+        {
+            _positionService = positionService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<PositionDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var positions = _positionService.GetPositions();
+
+            return Ok(positions);
         }
 
-        // GET api/<PositionsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetPositionById")]
+        public ActionResult<PositionDto> Get(int id)
         {
-            return "value";
+            var position = _positionService.GetPositionById(id);
+
+            return Ok(position);
         }
 
-        // POST api/<PositionsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] PositionForCreateDto position)
         {
+            _positionService.CreatePosition(position);
+
+            return StatusCode(201);
         }
 
-        // PUT api/<PositionsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] PositionForUpdateDto position)
         {
+            if (id != position.Id)
+            {
+                return BadRequest($"Route id: {id} does not match with parameter id: {position.Id}.");
+            }
+            _positionService.UpdatePosition(position);
+
+            return NoContent();
         }
 
-        // DELETE api/<PositionsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _positionService.DeletePosition(id);
+
+            return NoContent();
         }
     }
 }

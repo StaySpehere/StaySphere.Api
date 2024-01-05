@@ -1,43 +1,61 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using StaySphere.Domain.DTOs.Category;
+using StaySphere.Domain.Interfaces.Services;
 
 namespace StaySphere.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        // GET: api/<CategoriesController>
+        private readonly ICategoryService _categoryService;
+        public CategoriesController(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<CategoryDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var categories = _categoryService.GetCategories();
+
+            return Ok(categories);
         }
 
-        // GET api/<CategoriesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetCategoryById")]
+        public ActionResult<CategoryDto> Get(int id)
         {
-            return "value";
+            var category = _categoryService.GetCategoryById(id);
+
+            return Ok(category);
         }
 
-        // POST api/<CategoriesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] CategoryForCreateDto category)
         {
+            _categoryService.CreateCategory(category);
+
+            return StatusCode(201);
         }
 
-        // PUT api/<CategoriesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] CategoryForUpdateDto category)
         {
+            if (id != category.Id)
+            {
+                return BadRequest($"Route id: {id} does not match with parameter id: {category.Id}.");
+            }
+            _categoryService.UpdateCategory(category);
+
+            return NoContent();
         }
 
-        // DELETE api/<CategoriesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _categoryService.DeleteCategory(id);
+
+            return NoContent();
         }
     }
 }

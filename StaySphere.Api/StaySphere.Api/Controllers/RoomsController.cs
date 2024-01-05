@@ -1,43 +1,61 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using StaySphere.Domain.DTOs.Room;
+using StaySphere.Domain.Interfaces.Services;
 
 namespace StaySphere.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/rooms")]
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        // GET: api/<RoomsController>
+        public IRoomService _roomService;
+        public RoomsController(IRoomService roomService)
+        {
+            _roomService = roomService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<RoomDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var rooms = _roomService.GetRooms();
+
+            return Ok(rooms);
         }
 
-        // GET api/<RoomsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetRoomById")]
+        public ActionResult Get(int id)
         {
-            return "value";
+            var room = _roomService.GetRoomById(id);
+
+            return Ok(room);
         }
 
-        // POST api/<RoomsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] RoomForCreateDto room)
         {
+            _roomService.CreateRoom(room);
+
+            return StatusCode(201);
         }
 
-        // PUT api/<RoomsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] RoomForUpdateDto room)
         {
+            if (id != room.Id)
+            {
+                return BadRequest($"Route id: {id} does not match with parameter id: {room.Id}.");
+            }
+            _roomService.UpdateRoom(room);
+
+            return NoContent();
         }
 
-        // DELETE api/<RoomsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _roomService.DeleteRoom(id);
+
+            return NoContent();
         }
     }
 }

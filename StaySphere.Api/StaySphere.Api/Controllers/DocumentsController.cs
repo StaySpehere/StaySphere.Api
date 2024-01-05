@@ -1,43 +1,61 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using StaySphere.Domain.DTOs.Document;
+using StaySphere.Domain.Interfaces.Services;
 
 namespace StaySphere.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/documents")]
     [ApiController]
     public class DocumentsController : ControllerBase
     {
-        // GET: api/<DocumentsController>
+        public IDocumentService _documentService;
+        public DocumentsController(IDocumentService documentService)
+        {
+            _documentService = documentService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<DocumentDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var documents = _documentService.GetDocuments();
+
+            return Ok(documents);
         }
 
-        // GET api/<DocumentsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetDocumentById")]
+        public ActionResult<DocumentDto> Get(int id)
         {
-            return "value";
+            var document = _documentService.GetDocumentById(id);
+
+            return Ok(document);
         }
 
-        // POST api/<DocumentsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] DocumentForCreateDto document)
         {
+            _documentService.CreateDocument(document);
+
+            return StatusCode(201);
         }
 
-        // PUT api/<DocumentsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] DocumentForUpdateDto document)
         {
+            if (id != document.Id)
+            {
+                return BadRequest($"Route id: {id} does not match with parameter id: {document.Id}.");
+            }
+            _documentService.UpdateDocument(document);
+
+            return NoContent();
         }
 
-        // DELETE api/<DocumentsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _documentService.DeleteDocument(id);
+
+            return NoContent();
         }
     }
 }
