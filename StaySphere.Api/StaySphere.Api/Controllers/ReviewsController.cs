@@ -1,43 +1,61 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using StaySphere.Domain.DTOs.Review;
+using StaySphere.Domain.Interfaces.Services;
 
 namespace StaySphere.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/reviews")]
     [ApiController]
     public class ReviewsController : ControllerBase
     {
-        // GET: api/<ReviewsController>
+        public IReviewService _reviewService;
+        public ReviewsController(IReviewService reviewService)
+        {
+            _reviewService = reviewService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<ReviewDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var reviews = _reviewService.GetReviews();
+
+            return Ok(reviews);
         }
 
-        // GET api/<ReviewsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetReviewById")]
+        public ActionResult<ReviewDto> Get(int id)
         {
-            return "value";
+            var review = _reviewService.GetReviewById(id);
+
+            return Ok(review);
         }
 
-        // POST api/<ReviewsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] ReviewForCreateDto review)
         {
+            _reviewService.CreateReview(review);
+
+            return StatusCode(201);
         }
 
-        // PUT api/<ReviewsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] ReviewForUpdateDto review)
         {
+            if (id != review.Id)
+            {
+                return BadRequest($"Route id: {id} does not match with parameter id: {review.Id}.");
+            }
+            _reviewService.UpdateReview(review);
+
+            return NoContent();
         }
 
-        // DELETE api/<ReviewsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _reviewService.DeleteReview(id);
+
+            return NoContent();
         }
     }
 }

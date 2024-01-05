@@ -2,7 +2,7 @@
 
 namespace StaySphere.Domain.Interfaces.Services
 {
-    internal interface ICategoryService
+    public interface ICategoryService
     {
         Task<CategoryDto> GetCategories();
         Task<CategoryDto?> GetCategoryById(int id);

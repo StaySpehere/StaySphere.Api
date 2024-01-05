@@ -1,43 +1,62 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using StaySphere.Domain.DTOs.Guest;
+using StaySphere.Domain.Interfaces.Services;
 
 namespace StaySphere.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/guests")]
     [ApiController]
     public class GuestsController : ControllerBase
     {
-        // GET: api/<GuestsController>
+        public IGuestService _guestService;
+        public GuestsController(IGuestService guestService)
+        {
+            _guestService = guestService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<GuestDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var guests = _guestService.GetGuests();
+
+            return Ok(guests);
         }
 
-        // GET api/<GuestsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetGuestById")]
+        public ActionResult<GuestDto> Get(int id)
         {
-            return "value";
+            var guest = _guestService.GetGuestById(id);
+
+            return Ok(guest);
+
         }
 
-        // POST api/<GuestsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] GuestForCreateDto guest)
         {
+            _guestService.CreateGuest(guest);
+
+            return NoContent();
         }
 
-        // PUT api/<GuestsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] GuestForUpdateDto guest)
         {
+            if (id != guest.Id)
+            {
+                return BadRequest($"Route id: {id} does not match with parameter id: {guest.Id}.");
+            }
+            _guestService.UpdateGuest(guest);
+
+            return NoContent();
         }
 
-        // DELETE api/<GuestsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _guestService.DeleteGuest(id);
+
+            return NoContent();
         }
     }
 }
