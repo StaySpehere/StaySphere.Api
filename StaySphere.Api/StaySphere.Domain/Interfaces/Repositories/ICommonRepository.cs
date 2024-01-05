@@ -11,7 +11,6 @@ namespace StaySphere.Domain.Interfaces.Repositories
         public IPositionRepository Position { get; }
         public IReviewRepository Review { get; }
         public IRoomRepository Room { get; }
-        public int SaveChanges();
         public Task<int> SaveChangesAsync();
     }
 }
