@@ -114,9 +114,7 @@ namespace StaySphere.Services
             {
                 _context.Bookings.Remove(booking);
             }
-          await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
-
-       
     }
 }
