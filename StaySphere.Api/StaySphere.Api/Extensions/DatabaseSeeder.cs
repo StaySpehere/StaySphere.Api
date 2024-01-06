@@ -25,11 +25,27 @@ namespace StaySphere.Api.Extensions
             if (context.Employees.Any()) return;
 
             var positions = new List<Position>
-        {
-            new Position { Name = "Manager", Salary = 5000 },
-            new Position { Name = "Receptionist", Salary = 3000 },
-            // Add more positions if needed
-        };
+            {
+                new Position { Name = "Manager", Salary = 5000 },
+                new Position { Name = "Receptionist", Salary = 3000 },
+                new Position { Name = "Housekeeper", Salary = 2500 },
+                new Position { Name = "Chef", Salary = 4000 },
+                new Position { Name = "Concierge", Salary = 3500 },
+                new Position { Name = "Front Desk Supervisor", Salary = 3500 },
+                new Position { Name = "Bellboy", Salary = 2000 },
+                new Position { Name = "Room Service Attendant", Salary = 3000 },
+                new Position { Name = "Event Coordinator", Salary = 4000 },
+                new Position { Name = "Security Officer", Salary = 3200 },
+                new Position { Name = "Valet Parking Attendant", Salary = 2500 },
+                new Position { Name = "Spa Therapist", Salary = 3500 },
+                new Position { Name = "Hotel Accountant", Salary = 4500 },
+                new Position { Name = "Maintenance Technician", Salary = 3200 },
+                new Position { Name = "Human Resources Coordinator", Salary = 3800 },
+                new Position { Name = "Marketing Specialist", Salary = 4000 },
+                new Position { Name = "Guest Relations Manager", Salary = 4800 },
+                new Position { Name = "Barista", Salary = 2300 },
+                new Position { Name = "Lifeguard", Salary = 2700 }
+            };
 
             context.Positions.AddRange(positions);
             context.SaveChanges();
@@ -184,9 +200,25 @@ namespace StaySphere.Api.Extensions
 
             var positions = new List<Position>
             {
-                 new Position { Name = "Manager", Salary = 5000 },
-                 new Position { Name = "Receptionist", Salary = 3000 },
-            // Add more positions if needed
+                new Position { Name = "Manager", Salary = 5000 },
+                new Position { Name = "Receptionist", Salary = 3000 },
+                new Position { Name = "Housekeeper", Salary = 2500 },
+                new Position { Name = "Chef", Salary = 4000 },
+                new Position { Name = "Concierge", Salary = 3500 },
+                new Position { Name = "Front Desk Supervisor", Salary = 3500 },
+                new Position { Name = "Bellboy", Salary = 2000 },
+                new Position { Name = "Room Service Attendant", Salary = 3000 },
+                new Position { Name = "Event Coordinator", Salary = 4000 },
+                new Position { Name = "Security Officer", Salary = 3200 },
+                new Position { Name = "Valet Parking Attendant", Salary = 2500 },
+                new Position { Name = "Spa Therapist", Salary = 3500 },
+                new Position { Name = "Hotel Accountant", Salary = 4500 },
+                new Position { Name = "Maintenance Technician", Salary = 3200 },
+                new Position { Name = "Human Resources Coordinator", Salary = 3800 },
+                new Position { Name = "Marketing Specialist", Salary = 4000 },
+                new Position { Name = "Guest Relations Manager", Salary = 4800 },
+                new Position { Name = "Barista", Salary = 2300 },
+                new Position { Name = "Lifeguard", Salary = 2700 }
             };
 
             context.Positions.AddRange(positions);
