@@ -24,10 +24,10 @@ namespace StaySphere.Infrastructure.Persistence.Configurations
                 .WithMany(r => r.Bookings)
                 .HasForeignKey(b => b.RoomId);
 
-            builder.Property(b => b.CheckInData)
+            builder.Property(b => b.CheckInDate)
                 .HasColumnType("date")
                 .IsRequired(true);
-            builder.Property(b => b.CheckOutData)
+            builder.Property(b => b.CheckOutDate)
                 .HasColumnType("date")
                 .IsRequired(true);
             builder.Property(b => b.TotalPrice)

@@ -20,4 +20,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StaySphere.Domain\StaySphere.Domain.csproj" />
+    <ProjectReference Include="..\StaySphere.Infrastructure\StaySphere.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

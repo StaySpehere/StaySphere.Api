@@ -161,8 +161,8 @@ namespace StaySphere.Api.Extensions
             {
                 bookings.Add(new Booking
                 {
-                    CheckInData = _faker.Date.Between(DateTime.Now, DateTime.Now.AddDays(30)),
-                    CheckOutData = _faker.Date.Between(DateTime.Now.AddDays(31), DateTime.Now.AddDays(60)),
+                    CheckInDate = _faker.Date.Between(DateTime.Now, DateTime.Now.AddDays(30)),
+                    CheckOutDate = _faker.Date.Between(DateTime.Now.AddDays(31), DateTime.Now.AddDays(60)),
                     TotalPrice = _faker.Random.Decimal(100, 2000),
                     GuestId = _faker.PickRandom(guests).Id,
                     EmployeeId = _faker.PickRandom(employees).Id,
