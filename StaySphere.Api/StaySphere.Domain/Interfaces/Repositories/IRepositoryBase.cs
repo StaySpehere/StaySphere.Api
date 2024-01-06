@@ -8,6 +8,6 @@ namespace StaySphere.Domain.Interfaces.Repositories
         Task<T> FindById(int id);
         Task<T> Create(T entity);
         Task Update(T entity);
-        Task Delete(int id);  
+        Task Delete(T entity);  
     }
 }
