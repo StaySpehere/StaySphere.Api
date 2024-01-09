@@ -12,26 +12,14 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
         {
             _context = context;
         }
-        public async Task<T> Create(T entity)
+        public async Task<IEnumerable<T>> GetAll()
         {
-            var createEntity = await _context.Set<T>().AddAsync(entity);
+            var entities = await _context.Set<T>()
+                .AsNoTracking()
+                .ToListAsync();
 
-            return createEntity.Entity;
+            return entities;
         }
-
-        public async Task Delete(int id)
-        {
-            var entity = await FindById(id);
-
-            if (entity is null)
-            {
-                throw new EntityNotFoundException(
-                    $"Entity {typeof(T)} with id: {id} not found.");
-            }
-
-            _context.Set<T>().Remove(entity);
-        }
-
         public async Task<T> FindById(int id)
         {
             var entity = await _context.Set<T>().FindAsync(id);
@@ -44,19 +32,25 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
 
             return entity;
         }
-
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<T> Create(T entity)
         {
-            var entities = await _context.Set<T>()
-                .AsNoTracking()
-                .ToListAsync();
+            var createEntity = await _context.Set<T>().AddAsync(entity);
 
-            return entities;
+            return createEntity.Entity;
         }
-
         public async Task Update(T entity)
         {
             _context.Set<T>().Update(entity);
+        }
+        public async Task Delete(int id)
+        {
+            var entity = await FindById(id);
+            if (entity is null)
+            {
+                throw new EntityNotFoundException(
+                    $"Entity {typeof(T)} with id: {id} not found.");
+            }
+            _context.Set<T>().Remove(entity);
         }
     }
 }
