@@ -35,7 +35,6 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
                 return _document;
             }
         }
-
         public IEmployeeRepository _employee;
         public IEmployeeRepository Employee
         {
@@ -45,7 +44,6 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
                 return _employee;
             }
         }
-
         public IGuestRepository _guest;
         public IGuestRepository Guest
         {
@@ -55,7 +53,6 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
                 return _guest;
             }
         }
-
         public IPositionRepository _position;
         public IPositionRepository Position
         {
@@ -65,7 +62,6 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
                 return _position;
             }
         }
-
         public IReviewRepository _review;
         public IReviewRepository Review
         {
@@ -75,7 +71,6 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
                 return _review;
             }
         }
-
         public IRoomRepository _room;
         public IRoomRepository Room
         {
@@ -85,7 +80,6 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
                 return _room;
             }
         }
-
         public CommonRepository(StaySphereDbContext context)
         {
             _context = context;
@@ -99,6 +93,5 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
             _room = new RoomRepository(context);
         }
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
-
     }
 }
