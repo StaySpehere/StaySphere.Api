@@ -1,6 +1,8 @@
-﻿using Serilog;
+﻿using Microsoft.EntityFrameworkCore;
+using Serilog;
 using StaySphere.Domain.Interfaces.Repositories;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Infrastructure.Persistence;
 using StaySphere.Infrastructure.Persistence.Repositories;
 
 namespace StaySphere.Api.Extensions
@@ -30,6 +32,16 @@ namespace StaySphere.Api.Extensions
                 .WriteTo.File("logs/logs.txt", rollingInterval: RollingInterval.Day)
                 .WriteTo.File("logs/error_.txt", Serilog.Events.LogEventLevel.Error, rollingInterval: RollingInterval.Day)
                 .CreateLogger();
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureDatabaseContext(this IServiceCollection services)
+        {
+            var builder = WebApplication.CreateBuilder();
+
+            services.AddDbContext<StaySphereDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("StaySphereDb")));
 
             return services;
         }
