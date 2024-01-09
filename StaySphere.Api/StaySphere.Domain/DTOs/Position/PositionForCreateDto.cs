@@ -1,5 +1,5 @@
 ﻿namespace StaySphere.Domain.DTOs.Position
 {
-    public class PositionForCreateDto(string Name, decimal Salary);
+    public record PositionForCreateDto(string Name, decimal Salary);
 
 }
