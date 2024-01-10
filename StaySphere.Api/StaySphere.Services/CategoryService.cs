@@ -95,6 +95,7 @@ namespace StaySphere.Services
         public async Task DeleteCategory(int id)
         {
             var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+
             if (category is not null)
             {
                 _context.Categories.Remove(category);
