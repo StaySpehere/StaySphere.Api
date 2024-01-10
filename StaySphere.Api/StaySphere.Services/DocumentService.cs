@@ -7,7 +7,7 @@ using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
 using StaySphere.Infrastructure.Persistence;
-using System.Reflection.Metadata;
+using Document = StaySphere.Domain.Entities.Document;
 
 namespace StaySphere.Services
 {
@@ -52,10 +52,10 @@ namespace StaySphere.Services
             return new PaginatedList<DocumentDto>(documentDtos, documents.TotalCount, documents.CurrentPage, documents.PageSize);
         }
 
-        public async Task<DocumentDto?> GetDocumentById(int  id)
+        public async Task<DocumentDto?> GetDocumentById(int id)
         {
             var documents = await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
-            
+
             if (documents is null)
             {
                 throw new EntityNotFoundException($"Document with {id} not found");
@@ -74,6 +74,12 @@ namespace StaySphere.Services
             var documentDto = _mapper.Map<DocumentDto>(documentEntity);
             return documentDto;
         }
+        public async Task UpdateDocument(DocumentForUpdateDto documentForUpdateDto)
+        {
+            var documentEntity = _mapper.Map<Document>(documentForUpdateDto);
 
+            _context.Documents.Update(documentEntity);
+            await _context.SaveChangesAsync();
+        }
     }
 }
