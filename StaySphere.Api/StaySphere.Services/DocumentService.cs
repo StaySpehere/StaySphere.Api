@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Document;
+using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
@@ -46,7 +48,20 @@ namespace StaySphere.Services
             var documents = await query.ToPaginatedListAsync(documentResourceParameters.PageSize, documentResourceParameters.PageNumber);
             var documentDtos = _mapper.Map<List<DocumentDto>>(documents);
 
-            return new PaginatedList<DocumentDto>(documentDtos,documents.TotalCount,documents.CurrentPage, documents.PageSize)
+            return new PaginatedList<DocumentDto>(documentDtos, documents.TotalCount, documents.CurrentPage, documents.PageSize);
+        }
+
+        public async Task<DocumentDto?> GetDocumentById(int  id)
+        {
+            var documents = await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
+            
+            if (documents is null)
+            {
+                throw new EntityNotFoundException($"Document with {id} not found");
+            }
+
+            var documentDto = _mapper.Map<DocumentDto>(documents);
+            return documentDto;
         }
 
     }
