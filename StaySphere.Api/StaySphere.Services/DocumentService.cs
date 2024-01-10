@@ -7,6 +7,7 @@ using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
 using StaySphere.Infrastructure.Persistence;
+using System.Reflection.Metadata;
 
 namespace StaySphere.Services
 {
@@ -61,6 +62,16 @@ namespace StaySphere.Services
             }
 
             var documentDto = _mapper.Map<DocumentDto>(documents);
+            return documentDto;
+        }
+        public async Task<DocumentDto> CreateDocument(DocumentForCreateDto documentForCreateDto)
+        {
+            var documentEntity = _mapper.Map<Document>(documentForCreateDto);
+
+            _context.Add(documentEntity);
+            await _context.SaveChangesAsync();
+
+            var documentDto = _mapper.Map<DocumentDto>(documentEntity);
             return documentDto;
         }
 
