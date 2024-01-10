@@ -10,7 +10,7 @@ namespace StaySphere.Infrastructure.Persistence.Configurations
         {
             builder.ToTable("Category");
             builder.HasKey(c => c.Id);
-               
+
 
             builder.HasMany(c => c.Rooms)
                 .WithOne(r => r.Category)
