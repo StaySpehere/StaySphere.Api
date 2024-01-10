@@ -53,6 +53,7 @@ namespace StaySphere.Services
                     "Namedesc" => query.OrderByDescending(x => x.Name),
                     "Price" => query.OrderBy(x => x.Price),
                     "Pricedesc" => query.OrderByDescending(x => x.Price),
+                    _ => query.OrderBy(x => x.Name)
                 };
             }
 
