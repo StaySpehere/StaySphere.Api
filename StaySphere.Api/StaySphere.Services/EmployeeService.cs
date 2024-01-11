@@ -102,5 +102,15 @@ namespace StaySphere.Services
             _context.Add(employeeEntity);
             await _context.SaveChangesAsync();
         }
+
+        public async Task DeleteEmployee(int id)
+        {
+            var employee = await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(employee is not null)
+                _context.Remove(employee);
+
+            await _context.SaveChangesAsync();
+        }
     }
 }
