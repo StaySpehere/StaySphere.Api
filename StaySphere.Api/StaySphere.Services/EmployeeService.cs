@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Document;
 using StaySphere.Domain.DTOs.Employee;
+using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
@@ -80,6 +81,17 @@ namespace StaySphere.Services
             }
 
             var employeeDto = _mapper.Map<EmployeeDto>(employees);
+            return employeeDto;
+        }
+
+        public async Task<EmployeeDto> CreateEmployee(EmployeeForCreateDto employeeForCreateDto)
+        {
+            var employeeEntity = _mapper.Map<Employee>(employeeForCreateDto);
+
+            _context.Add(employeeEntity);
+            await _context.SaveChangesAsync();
+
+            var employeeDto = _mapper.Map<EmployeeDto>(employeeEntity);
             return employeeDto;
         }
     }
