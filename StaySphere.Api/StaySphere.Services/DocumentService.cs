@@ -19,9 +19,9 @@ namespace StaySphere.Services
 
         public DocumentService(IMapper mapper, StaySphereDbContext context, ILogger<DocumentService> logger)
         {
-            _mapper = mapper;
-            _context = context;
-            _logger = logger;
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<PaginatedList<DocumentDto>> GetDocuments(DocumentResourceParameters documentResourceParameters)
