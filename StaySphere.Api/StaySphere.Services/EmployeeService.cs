@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using StaySphere.Domain.DTOs.Document;
 using StaySphere.Domain.DTOs.Employee;
+using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
@@ -65,6 +68,19 @@ namespace StaySphere.Services
             var employeeDtos = _mapper.Map<List<EmployeeDto>>(employees);
 
             return new PaginatedList<EmployeeDto>(employeeDtos, employees.TotalCount, employees.CurrentPage, employees.PageSize);
+        }
+
+        public async Task<EmployeeDto?> GetEmployeeById(int id)
+        {
+            var employees = await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (employees is null)
+            {
+                throw new EntityNotFoundException($"Entity with id {id} not found!");
+            }
+
+            var employeeDto = _mapper.Map<EmployeeDto>(employees);
+            return employeeDto;
         }
     }
 }
