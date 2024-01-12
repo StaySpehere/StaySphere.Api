@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Review;
 using StaySphere.Domain.DTOs.Room;
+using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
@@ -64,6 +65,17 @@ namespace StaySphere.Services
 
             var roomDtos = _mapper.Map<RoomDto>(rooms);
             return roomDtos;
+        }
+
+        public async Task<RoomDto> CreateRoom(RoomForCreateDto roomForCreateDto)
+        {
+            var roomEntity = _mapper.Map<Room>(roomForCreateDto);
+
+            _context.Add(roomEntity);
+            await _context.SaveChangesAsync();
+
+            var roomDto = _mapper.Map<RoomDto>(roomEntity);
+            return roomDto;
         }
     }
 }
