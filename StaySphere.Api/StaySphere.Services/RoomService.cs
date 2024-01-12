@@ -77,5 +77,13 @@ namespace StaySphere.Services
             var roomDto = _mapper.Map<RoomDto>(roomEntity);
             return roomDto;
         }
+
+        public async Task UpdateRoom(RoomForUpdateDto roomForUpdateDto)
+        {
+            var roomEntity = _mapper.Map<Room>(roomForUpdateDto);
+
+            _context.Add(roomEntity);
+            await _context.SaveChangesAsync();
+        }
     }
 }
