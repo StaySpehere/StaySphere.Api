@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using StaySphere.Domain.DTOs.Position;
 using StaySphere.Domain.DTOs.Review;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
