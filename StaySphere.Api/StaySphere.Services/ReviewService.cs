@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using StaySphere.Domain.DTOs.Position;
 using StaySphere.Domain.DTOs.Review;
+using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
@@ -64,6 +67,19 @@ namespace StaySphere.Services
             var reviewsDtos = _mapper.Map<List<ReviewDto>>(reviews);
 
             return new PaginatedList<ReviewDto>(reviewsDtos, reviews.TotalCount, reviews.CurrentPage, reviews.PageSize);
+        }
+
+        public async Task<ReviewDto?> GetReviewsById(int id)
+        {
+            var reviews = await _context.Reviews.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (reviews is null)
+            {
+                throw new EntityNotFoundException($"Reviews with id {id} not found!");
+            }
+
+            var reviewDtos = _mapper.Map<ReviewDto>(reviews);
+            return reviewDtos;
         }
     }
 }
