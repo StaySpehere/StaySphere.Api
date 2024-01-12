@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using StaySphere.Domain.DTOs.Employee;
 using StaySphere.Domain.DTOs.Guest;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
@@ -75,6 +76,14 @@ namespace StaySphere.Services
 
             var guestDto = _mapper.Map<GuestDto>(guestEntity);
             return guestDto;
+        }
+
+        public async Task UpdateGuest(GuestForUpdateDto guestForUpdateDto)
+        {
+            var guestEntity = _mapper.Map<Guest>(guestForUpdateDto);
+
+            _context.Add(guestEntity);
+            await _context.SaveChangesAsync();
         }
     }
 }
