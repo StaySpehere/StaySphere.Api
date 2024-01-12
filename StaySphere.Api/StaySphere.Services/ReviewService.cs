@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Position;
 using StaySphere.Domain.DTOs.Review;
+using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
@@ -80,6 +81,17 @@ namespace StaySphere.Services
 
             var reviewDtos = _mapper.Map<ReviewDto>(reviews);
             return reviewDtos;
+        }
+
+        public async Task<ReviewDto> CreatePosition(ReviewForCreateDto reviewForCreateDto)
+        {
+            var reviewEntity = _mapper.Map<Review>(reviewForCreateDto);
+
+            _context.Add(reviewEntity);
+            await _context.SaveChangesAsync();
+
+            var reviewDto = _mapper.Map<ReviewDto>(reviewEntity);
+            return reviewDto;
         }
     }
 }
