@@ -70,7 +70,7 @@ namespace StaySphere.Services
             return new PaginatedList<ReviewDto>(reviewsDtos, reviews.TotalCount, reviews.CurrentPage, reviews.PageSize);
         }
 
-        public async Task<ReviewDto?> GetReviewsById(int id)
+        public async Task<ReviewDto?> GetReviewById(int id)
         {
             var reviews = await _context.Reviews.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -99,6 +99,16 @@ namespace StaySphere.Services
             var reviewEntity = _mapper.Map<Review>(reviewForUpdateDto);
 
             _context.Add(reviewEntity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteReview(int id)
+        {
+            var review = await _context.Reviews.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (review is not null)
+                _context.Remove(review);
+
             await _context.SaveChangesAsync();
         }
     }
