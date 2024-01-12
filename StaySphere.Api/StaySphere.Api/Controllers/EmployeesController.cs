@@ -19,9 +19,9 @@ namespace StaySphere.Api.Controllers
         public ActionResult<IEnumerable<EmployeeDto>> GetEmployeesAsync(
        [FromQuery] EmployeeResourceParameters employeeResourceParameters)
         {
-            var products = _employeeService.GetEmployees(employeeResourceParameters);
+            var employees = _employeeService.GetEmployees(employeeResourceParameters);
 
-            return Ok(products);
+            return Ok(employees);
         }
 
         [HttpGet("{id}", Name = "GetEmployeeById")]
