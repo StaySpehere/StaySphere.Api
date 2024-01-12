@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Guest;
 using StaySphere.Domain.DTOs.Position;
+using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
@@ -71,6 +72,17 @@ namespace StaySphere.Services
 
             var positionDtos = _mapper.Map<PositionDto>(positions);
             return positionDtos;
+        }
+
+        public async Task<PositionDto> CreatePosition(PositionForCreateDto positionForCreateDto)
+        {
+            var positionEntity = _mapper.Map<Position>(positionForCreateDto);
+
+            _context.Add(positionEntity);
+            await _context.SaveChangesAsync();
+
+            var positionDto = _mapper.Map<PositionDto>(positionEntity);
+            return positionDto;
         }
     }
 }
