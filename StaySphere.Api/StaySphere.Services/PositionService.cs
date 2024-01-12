@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Guest;
 using StaySphere.Domain.DTOs.Position;
+using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
@@ -56,6 +58,19 @@ namespace StaySphere.Services
             var positionsDtos = _mapper.Map<List<PositionDto>>(positions);
 
             return new PaginatedList<PositionDto>(positionsDtos, positions.TotalCount, positions.CurrentPage, positions.PageSize);
+        }
+
+        public async Task<PositionDto?> GetPositionById(int id)
+        {
+            var positions = await _context.Positions.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (positions is null)
+            {
+                throw new EntityNotFoundException($"Position with id {id} not found!");
+            }
+
+            var positionDtos = _mapper.Map<PositionDto>(positions);
+            return positionDtos;
         }
     }
 }
