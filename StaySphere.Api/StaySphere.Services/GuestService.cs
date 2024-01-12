@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using StaySphere.Domain.DTOs.Guest;
+using StaySphere.Domain.ResourceParameters;
 using StaySphere.Infrastructure.Persistence;
 
 namespace StaySphere.Services
@@ -15,6 +17,11 @@ namespace StaySphere.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
+        public async Task<GuestResourceParameters<GuestDto>> GetGuests()
+        {
+
         }
     }
 }

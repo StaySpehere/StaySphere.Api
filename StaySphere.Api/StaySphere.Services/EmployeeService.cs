@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using StaySphere.Domain.DTOs.Document;
 using StaySphere.Domain.DTOs.Employee;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
@@ -107,7 +106,7 @@ namespace StaySphere.Services
         {
             var employee = await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
 
-            if(employee is not null)
+            if (employee is not null)
                 _context.Remove(employee);
 
             await _context.SaveChangesAsync();
