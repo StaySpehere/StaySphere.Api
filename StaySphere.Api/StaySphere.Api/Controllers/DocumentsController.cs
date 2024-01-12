@@ -19,9 +19,9 @@ namespace StaySphere.Api.Controllers
         public ActionResult<IEnumerable<DocumentDto>> GetDocumentsAsync(
             [FromQuery] DocumentResourceParameters documentResourceParameters)
         {
-            var products = _documentService.GetDocuments(documentResourceParameters);
+            var documents = _documentService.GetDocuments(documentResourceParameters);
 
-            return Ok(products);
+            return Ok(documents);
         }
 
         [HttpGet("{id}", Name = "GetDocumentById")]
