@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Review;
 using StaySphere.Domain.DTOs.Room;
+using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
@@ -49,7 +51,19 @@ namespace StaySphere.Services
             var roomDtos = _mapper.Map<List<RoomDto>>(rooms);
 
             return new PaginatedList<RoomDto>(roomDtos, rooms.TotalCount, rooms.CurrentPage, rooms.PageSize);
+        }
 
+        public async Task<RoomDto?> GetRoomById(int id)
+        {
+            var rooms = await _context.Rooms.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (rooms is null)
+            {
+                throw new EntityNotFoundException($"Room with id {id} not found!");
+            }
+
+            var roomDtos = _mapper.Map<RoomDto>(rooms);
+            return roomDtos;
         }
     }
 }
