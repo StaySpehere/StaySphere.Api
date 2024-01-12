@@ -17,7 +17,7 @@ namespace StaySphere.Api.Controllers
 
         [HttpGet]
         public ActionResult<IEnumerable<GuestDto>> GetGuestAsync(
-       [FromQuery] GuestResourceParameters guestResourceParameters)
+               [FromQuery] GuestResourceParameters guestResourceParameters)
         {
             var guests = _guestService.GetGuests(guestResourceParameters);
 

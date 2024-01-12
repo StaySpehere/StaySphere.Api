@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.ResourceParameters;
+using StaySphere.Services;
 
 namespace StaySphere.Api.Controllers
 {
@@ -15,9 +18,10 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoryDto>> Get()
+        public ActionResult<IEnumerable<CategoryDto>> GetCategoriesAsync(
+               [FromQuery] CategoryResourceParameters categoryResourceParameters)
         {
-            var categories = _categoryService.GetCategories();
+            var categories = _categoryService.GetCategories(categoryResourceParameters);
 
             return Ok(categories);
         }

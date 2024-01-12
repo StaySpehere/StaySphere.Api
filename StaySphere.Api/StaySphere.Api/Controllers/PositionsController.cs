@@ -19,7 +19,7 @@ namespace StaySphere.Api.Controllers
 
         [HttpGet]
         public ActionResult<IEnumerable<PositionDto>> GetPositionsAsync(
-       [FromQuery] PositionResourceParameters positionResourceParameters)
+              [FromQuery] PositionResourceParameters positionResourceParameters)
         {
             var positions = _positionService.GetPositions(positionResourceParameters);
 
