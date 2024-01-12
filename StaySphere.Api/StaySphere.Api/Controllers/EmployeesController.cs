@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Employee;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.ResourceParameters;
 
 namespace StaySphere.Api.Controllers
 {
@@ -15,11 +16,12 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<EmployeeDto>> Get()
+        public ActionResult<IEnumerable<EmployeeDto>> GetEmployeesAsync(
+       [FromQuery] EmployeeResourceParameters employeeResourceParameters)
         {
-            var employees = _employeeService.GetEmployees();
+            var products = _employeeService.GetEmployees(employeeResourceParameters);
 
-            return Ok(employees);
+            return Ok(products);
         }
 
         [HttpGet("{id}", Name = "GetEmployeeById")]
