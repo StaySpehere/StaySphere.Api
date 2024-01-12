@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using StaySphere.Domain.DTOs.Review;
 using StaySphere.Domain.DTOs.Room;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
@@ -83,6 +82,16 @@ namespace StaySphere.Services
             var roomEntity = _mapper.Map<Room>(roomForUpdateDto);
 
             _context.Add(roomEntity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteRoom(int id)
+        {
+            var room = await _context.Rooms.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (room is not null)
+                _context.Remove(room);
+
             await _context.SaveChangesAsync();
         }
     }
