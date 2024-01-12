@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using StaySphere.Domain.DTOs.Employee;
 using StaySphere.Domain.DTOs.Guest;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
@@ -83,6 +82,16 @@ namespace StaySphere.Services
             var guestEntity = _mapper.Map<Guest>(guestForUpdateDto);
 
             _context.Add(guestEntity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteGuest(int id)
+        {
+            var guest = await _context.Guests.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (guest is not null)
+                _context.Remove(guest);
+
             await _context.SaveChangesAsync();
         }
     }
