@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Guest;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.ResourceParameters;
 
 namespace StaySphere.Api.Controllers
 {
@@ -15,13 +16,13 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<GuestDto>> Get()
+        public ActionResult<IEnumerable<GuestDto>> GetGuestAsync(
+       [FromQuery] GuestResourceParameters guestResourceParameters)
         {
-            var guests = _guestService.GetGuests();
+            var guests = _guestService.GetGuests(guestResourceParameters);
 
             return Ok(guests);
         }
-
         [HttpGet("{id}", Name = "GetGuestById")]
         public ActionResult<GuestDto> Get(int id)
         {
