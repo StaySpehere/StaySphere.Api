@@ -1,13 +1,17 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using StaySphere.Domain.DTOs.Employee;
 using StaySphere.Domain.DTOs.Guest;
+using StaySphere.Domain.Exeptions;
+using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
 using StaySphere.Infrastructure.Persistence;
 
 namespace StaySphere.Services
 {
-    public class GuestService
+    public class GuestService : IGuestService
     {
         public readonly IMapper _mapper;
         public readonly StaySphereDbContext _context;
@@ -47,6 +51,19 @@ namespace StaySphere.Services
             var guestDtos = _mapper.Map<List<GuestDto>>(guests);
 
             return new PaginatedList<GuestDto>(guestDtos, guests.TotalCount, guests.CurrentPage, guests.PageSize);
+        }
+
+        public async Task<GuestDto?> GetGuestById(int id)
+        {
+            var guests = await _context.Guests.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (guests is null)
+            {
+                throw new EntityNotFoundException($"Guest with id {id} not found!");
+            }
+
+            var guestDtos = _mapper.Map<GuestDto>(guests);
+            return guestDtos;
         }
     }
 }
