@@ -92,5 +92,15 @@ namespace StaySphere.Services
             _context.Add(positionEntity);
             await _context.SaveChangesAsync();
         }
+
+        public async Task DeletePosition(int id)
+        {
+            var position = await _context.Positions.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (position is not null)
+                _context.Remove(position);
+
+            await _context.SaveChangesAsync();
+        }
     }
 }
