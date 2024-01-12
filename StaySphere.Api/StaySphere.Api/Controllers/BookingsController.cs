@@ -19,9 +19,9 @@ namespace StaySphere.Api.Controllers
         public ActionResult<IEnumerable<BookingDto>> GetBookingsAsync(
             [FromQuery] BookingResourceParameters bookingResourceParameters)
         {
-            var products = _bookingService.GetBookings(bookingResourceParameters);
+            var bookings = _bookingService.GetBookings(bookingResourceParameters);
 
-            return Ok(products);
+            return Ok(bookings);
         }
 
         [HttpGet("{id}", Name = "GetBookingById")]
