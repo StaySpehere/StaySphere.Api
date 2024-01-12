@@ -83,7 +83,7 @@ namespace StaySphere.Services
             return reviewDtos;
         }
 
-        public async Task<ReviewDto> CreatePosition(ReviewForCreateDto reviewForCreateDto)
+        public async Task<ReviewDto> CreateReview(ReviewForCreateDto reviewForCreateDto)
         {
             var reviewEntity = _mapper.Map<Review>(reviewForCreateDto);
 
@@ -92,6 +92,14 @@ namespace StaySphere.Services
 
             var reviewDto = _mapper.Map<ReviewDto>(reviewEntity);
             return reviewDto;
+        }
+
+        public async Task UpdateReview(ReviewForUpdateDto reviewForUpdateDto)
+        {
+            var reviewEntity = _mapper.Map<Review>(reviewForUpdateDto);
+
+            _context.Add(reviewEntity);
+            await _context.SaveChangesAsync();
         }
     }
 }
