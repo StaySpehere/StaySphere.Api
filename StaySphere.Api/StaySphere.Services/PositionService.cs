@@ -84,5 +84,13 @@ namespace StaySphere.Services
             var positionDto = _mapper.Map<PositionDto>(positionEntity);
             return positionDto;
         }
+
+        public async Task UpdatePosition(PositionForUpdateDto positionForUpdateDto)
+        {
+            var positionEntity = _mapper.Map<Position>(positionForUpdateDto);
+
+            _context.Add(positionEntity);
+            await _context.SaveChangesAsync();
+        }
     }
 }
