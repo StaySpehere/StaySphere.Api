@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Document;
 using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
@@ -15,13 +14,11 @@ namespace StaySphere.Services
     {
         private readonly IMapper _mapper;
         private readonly StaySphereDbContext _context;
-        private readonly ILogger<DocumentService> _logger;
 
-        public DocumentService(IMapper mapper, StaySphereDbContext context, ILogger<DocumentService> logger)
+        public DocumentService(IMapper mapper, StaySphereDbContext context)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<PaginatedList<DocumentDto>> GetDocuments(DocumentResourceParameters documentResourceParameters)
@@ -83,8 +80,8 @@ namespace StaySphere.Services
         }
         public async Task DeleteDocument(int id)
         {
-           var document = await _context.Documents.FirstOrDefaultAsync(x =>x.Id == id);
-            
+            var document = await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
+
             if (document is not null)
                 _context.Documents.Remove(document);
 
