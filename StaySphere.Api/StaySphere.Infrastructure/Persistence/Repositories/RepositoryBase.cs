@@ -12,7 +12,7 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             var entities = await _context.Set<T>()
                 .AsNoTracking()
@@ -20,7 +20,7 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
 
             return entities;
         }
-        public async Task<T> FindById(int id)
+        public async Task<T> FindByIdAsync(int id)
         {
             var entity = await _context.Set<T>().FindAsync(id);
 
@@ -32,19 +32,19 @@ namespace StaySphere.Infrastructure.Persistence.Repositories
 
             return entity;
         }
-        public async Task<T> Create(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
             var createEntity = await _context.Set<T>().AddAsync(entity);
 
             return createEntity.Entity;
         }
-        public async Task Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _context.Set<T>().Update(entity);
         }
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var entity = await FindById(id);
+            var entity = await FindByIdAsync(id);
             if (entity is null)
             {
                 throw new EntityNotFoundException(
