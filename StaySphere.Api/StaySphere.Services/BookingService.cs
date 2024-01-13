@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
@@ -16,7 +15,6 @@ namespace StaySphere.Services
         private readonly IMapper _mapper;
         private readonly StaySphereDbContext _context;
         public BookingService(IMapper mapper,
-           ILogger<BookingService> logger,
            StaySphereDbContext context)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
