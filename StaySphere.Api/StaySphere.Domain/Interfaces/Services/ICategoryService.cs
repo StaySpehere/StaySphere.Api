@@ -1,5 +1,4 @@
-﻿using StaySphere.Domain.DTOs.Booking;
-using StaySphere.Domain.DTOs.Category;
+﻿using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
 
