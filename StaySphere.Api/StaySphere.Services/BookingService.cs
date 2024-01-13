@@ -15,15 +15,12 @@ namespace StaySphere.Services
     {
         private readonly IMapper _mapper;
         private readonly StaySphereDbContext _context;
-        private readonly ILogger<BookingService> _logger;
-
         public BookingService(IMapper mapper,
            ILogger<BookingService> logger,
            StaySphereDbContext context)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<PaginatedList<BookingDto>> GetBookings(BookingResourceParameters bookingResourceParameters)
