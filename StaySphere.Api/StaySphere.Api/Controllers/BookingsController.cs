@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.ResourceParameters;
 
 namespace StaySphere.Api.Controllers
 {
@@ -15,11 +16,12 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<BookingDto>> Get()
+        public ActionResult<IEnumerable<BookingDto>> GetBookingsAsync(
+              [FromQuery] BookingResourceParameters bookingResourceParameters)
         {
-            var customers = _bookingService.GetBookings();
+            var bookings = _bookingService.GetBookings(bookingResourceParameters);
 
-            return Ok(customers);
+            return Ok(bookings);
         }
 
         [HttpGet("{id}", Name = "GetBookingById")]

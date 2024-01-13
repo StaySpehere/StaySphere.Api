@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.DTOs.Review;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.ResourceParameters;
+using StaySphere.Services;
 
 namespace StaySphere.Api.Controllers
 {
@@ -15,9 +18,10 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ReviewDto>> Get()
+        public ActionResult<IEnumerable<ReviewDto>> GetReviewAsync(
+               [FromQuery] ReviewResourceParameters reviewResourceParameters)
         {
-            var reviews = _reviewService.GetReviews();
+            var reviews = _reviewService.GetReviews(reviewResourceParameters);
 
             return Ok(reviews);
         }

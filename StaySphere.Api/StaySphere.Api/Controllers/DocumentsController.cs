@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Document;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.ResourceParameters;
 
 namespace StaySphere.Api.Controllers
 {
@@ -15,9 +16,10 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<DocumentDto>> Get()
+        public ActionResult<IEnumerable<DocumentDto>> GetDocumentsAsync(
+            [FromQuery] DocumentResourceParameters documentResourceParameters)
         {
-            var documents = _documentService.GetDocuments();
+            var documents = _documentService.GetDocuments(documentResourceParameters);
 
             return Ok(documents);
         }

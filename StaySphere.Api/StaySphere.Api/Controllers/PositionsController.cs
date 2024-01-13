@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.DTOs.Position;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.ResourceParameters;
+using StaySphere.Services;
 
 namespace StaySphere.Api.Controllers
 {
@@ -15,13 +18,13 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<PositionDto>> Get()
+        public ActionResult<IEnumerable<PositionDto>> GetPositionsAsync(
+              [FromQuery] PositionResourceParameters positionResourceParameters)
         {
-            var positions = _positionService.GetPositions();
+            var positions = _positionService.GetPositions(positionResourceParameters);
 
             return Ok(positions);
         }
-
         [HttpGet("{id}", Name = "GetPositionById")]
         public ActionResult<PositionDto> Get(int id)
         {

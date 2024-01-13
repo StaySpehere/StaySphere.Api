@@ -9,7 +9,7 @@ namespace StaySphere.Domain.Mappings
         public BookingMappings()
         {
             CreateMap<Booking, BookingDto>()
-                .ForMember(x => x.StayDuration, r => r.MapFrom(x => x.CheckOutData - x.CheckInData));
+                .ForMember(x => x.StayDuration, r => r.MapFrom(x => x.CheckOutDate - x.CheckInDate));
             CreateMap<BookingDto, Booking>();
             CreateMap<BookingForCreateDto, Booking>();
             CreateMap<BookingForUpdateDto, Booking>();

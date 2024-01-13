@@ -4,6 +4,6 @@ namespace StaySphere.Domain.ResourceParameters
 {
     public class DocumentResourceParameters : ResourceParametersBase
     {
-        public string OrderBy { get; set; } = "firstName";
+        public override string OrderBy { get; set; } = "firstName";
     }
 }
