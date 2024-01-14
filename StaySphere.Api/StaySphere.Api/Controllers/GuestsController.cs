@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Guest;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.ResourceParameters;
@@ -7,6 +8,7 @@ namespace StaySphere.Api.Controllers
 {
     [Route("api/guests")]
     [ApiController]
+    [Authorize]
     public class GuestsController : ControllerBase
     {
         public IGuestService _guestService;
