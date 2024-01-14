@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Room;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
@@ -15,13 +14,11 @@ namespace StaySphere.Services
     {
         public readonly IMapper _mapper;
         public readonly StaySphereDbContext _context;
-        public readonly ILogger<RoomService> _logger;
 
-        public RoomService(IMapper mapper, StaySphereDbContext context, ILogger<RoomService> logger)
+        public RoomService(IMapper mapper, StaySphereDbContext context)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<PaginatedList<RoomDto>> GetRooms(RoomResourceParameters roomResourceParameters)
