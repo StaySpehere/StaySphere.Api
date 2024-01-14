@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using StaySphere.Domain.DTOs.Booking;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Position;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.ResourceParameters;
-using StaySphere.Services;
 
 namespace StaySphere.Api.Controllers
 {
     [Route("api/positions")]
     [ApiController]
+    [Authorize]
     public class PositionsController : ControllerBase
     {
         public IPositionService _positionService;
