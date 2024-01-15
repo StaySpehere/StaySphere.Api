@@ -82,7 +82,7 @@ namespace StaySphere.Api.Extensions
                     SerialNumber = _faker.Random.Number(100000, 999999),
                     FirstName = _faker.Name.FirstName(),
                     LastName = _faker.Name.LastName(),
-                    BrithDate = _faker.Date.Past(30),
+                    BirthDate = _faker.Date.Past(30),
                     Gender = _faker.PickRandom("Male", "Female")
                 });
             }
