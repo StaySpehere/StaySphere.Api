@@ -7,7 +7,7 @@ namespace StaySphere.Domain.Entities
         public int SerialNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime BrithDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Gender { get; set; }
         public virtual ICollection<Guest> Guests { get; set; }
     }
