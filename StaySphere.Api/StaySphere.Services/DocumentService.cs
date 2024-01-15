@@ -35,8 +35,8 @@ namespace StaySphere.Services
                     "FirstNamedesc" => query.OrderByDescending(x => x.FirstName),
                     "LastName" => query.OrderBy(x => x.LastName),
                     "LastNamedesc" => query.OrderByDescending(x => x.LastName),
-                    "BirthDate" => query.OrderBy(x => x.BrithDate),
-                    "BirthDatedesc" => query.OrderByDescending(x => x.BrithDate),
+                    "BirthDate" => query.OrderBy(x => x.BirthDate),
+                    "BirthDatedesc" => query.OrderByDescending(x => x.BirthDate),
                     "Gender" => query.OrderBy(x => x.Gender),
                     "Genderdesc" => query.OrderByDescending(x => x.Gender),
                     _ => query.OrderBy(x => x.SerialNumber)
