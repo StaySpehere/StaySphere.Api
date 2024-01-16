@@ -65,7 +65,6 @@ namespace StaySphere.Api.Controllers
         public ActionResult Delete(int id)
         {
             _bookingService.DeleteBookingAsync(id);
-
             return NoContent();
         }
     }
