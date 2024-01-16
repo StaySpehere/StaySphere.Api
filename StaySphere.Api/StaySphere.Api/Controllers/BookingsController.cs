@@ -2,6 +2,8 @@
 using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.ResourceParameters;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StaySphere.Api.Controllers
 {
