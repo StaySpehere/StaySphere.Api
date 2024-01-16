@@ -2,12 +2,10 @@
 
 namespace StaySphere.Domain.DTOs.Guest
 {
-    public class GuestDto
-    {
-        public int Id { get; set; }
-        public int DocumentId { get; set; }
-        public int PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public ICollection<BookingDto> Bookings { get; set; }
-    }
+    public record GuestDto(
+        int Id,
+        int DocumentId,
+        int PhoneNumber,
+        string Email,
+        ICollection<BookingDto> Bookings);
 }

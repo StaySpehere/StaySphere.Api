@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Document;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.ResourceParameters;
@@ -7,6 +8,7 @@ namespace StaySphere.Api.Controllers
 {
     [Route("api/documents")]
     [ApiController]
+    [Authorize]
     public class DocumentsController : ControllerBase
     {
         public IDocumentService _documentService;

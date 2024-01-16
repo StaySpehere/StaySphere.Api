@@ -2,14 +2,12 @@
 
 namespace StaySphere.Domain.DTOs.Employee
 {
-    public class EmployeeDto
-    {
-        public int Id { get; set; }
-        public int PositionId { get; set; }
-        public string FullName { get; set; }
-        public int PhoneNumber { get; set; }
-        public decimal Salary { get; set; }
-        public ICollection<BookingDto> Bookings { get; set; }
-
-    }
+    public record EmployeeDto(
+        int Id,
+        int PositionId,
+        string FullName,
+        int PhoneNumber,
+        decimal Salary,
+        ICollection<BookingDto> Bookings);
 }
+

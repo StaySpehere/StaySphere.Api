@@ -20,7 +20,7 @@ namespace StaySphere.Infrastructure.Persistence.Configurations
                 .HasMaxLength(255);
             builder.Property(d => d.LastName)
                 .HasMaxLength(255);
-            builder.Property(d => d.BrithDate)
+            builder.Property(d => d.BirthDate)
                 .HasColumnType("date");
             builder.Property(d => d.Gender)
                 .HasMaxLength(255);

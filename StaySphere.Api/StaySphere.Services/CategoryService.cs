@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
@@ -15,15 +14,12 @@ namespace StaySphere.Services
     {
         private readonly IMapper _mapper;
         private readonly StaySphereDbContext _context;
-        private readonly ILogger<CategoryService> _logger;
 
         public CategoryService(IMapper mapper,
-           ILogger<CategoryService> logger,
            StaySphereDbContext context)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<PaginatedList<CategoryDto>> GetCategories(CategoryResourceParameters categoryResourceParameters)

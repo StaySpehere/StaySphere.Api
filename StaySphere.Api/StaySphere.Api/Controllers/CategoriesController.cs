@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
 using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.ResourceParameters;
@@ -7,6 +7,7 @@ namespace StaySphere.Api.Controllers
 {
     [Route("api/categories")]
     [ApiController]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;

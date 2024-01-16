@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
@@ -15,15 +14,11 @@ namespace StaySphere.Services
     {
         private readonly IMapper _mapper;
         private readonly StaySphereDbContext _context;
-        private readonly ILogger<BookingService> _logger;
-
         public BookingService(IMapper mapper,
-           ILogger<BookingService> logger,
            StaySphereDbContext context)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<PaginatedList<BookingDto>> GetBookingsAsync(BookingResourceParameters bookingResourceParameters)

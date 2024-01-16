@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
 using StaySphere.Domain.DTOs.Review;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.ResourceParameters;
@@ -7,6 +7,7 @@ namespace StaySphere.Api.Controllers
 {
     [Route("api/reviews")]
     [ApiController]
+    [Authorize]
     public class ReviewsController : ControllerBase
     {
         public IReviewService _reviewService;

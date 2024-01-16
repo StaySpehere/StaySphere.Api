@@ -1,4 +1,6 @@
+using Microsoft.IdentityModel.Tokens;
 using StaySphere.Api.Extensions;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureDatabaseContext();
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer(options => options.TokenValidationParameters = new()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "StaySphere-api",
+        ValidAudience = "StaySphere",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("StaySphere-Sekret-Key777777777777"))
+    });
 
 var app = builder.Build();
 
@@ -20,6 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
