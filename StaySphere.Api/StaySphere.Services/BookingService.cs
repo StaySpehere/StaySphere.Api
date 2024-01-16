@@ -26,7 +26,7 @@ namespace StaySphere.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<PaginatedList<BookingDto>> GetBookings(BookingResourceParameters bookingResourceParameters)
+        public async Task<PaginatedList<BookingDto>> GetBookingsAsync(BookingResourceParameters bookingResourceParameters)
         {
             var query = _context.Bookings.AsQueryable();
 
@@ -75,7 +75,7 @@ namespace StaySphere.Services
             return new PaginatedList<BookingDto>(bookingDtos, bookings.TotalCount, bookings.CurrentPage, bookings.PageSize);
         }
 
-        public async Task<BookingDto?> GetBookingById(int id)
+        public async Task<BookingDto?> GetBookingByIdAsync(int id)
         {
             var booking = await _context.Bookings.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -88,7 +88,7 @@ namespace StaySphere.Services
             return bookingDto;
         }
 
-        public async Task<BookingDto> CreateBooking(BookingForCreateDto bookingForCreateDto)
+        public async Task<BookingDto> CreateBookingAsync(BookingForCreateDto bookingForCreateDto)
         {
             var bookingEntity = _mapper.Map<Booking>(bookingForCreateDto);
 
@@ -99,7 +99,7 @@ namespace StaySphere.Services
 
             return bookingDto;
         }
-        public async Task UpdateBooking(BookingForUpdateDto bookingForUpdateDto)
+        public async Task UpdateBookingAsync(BookingForUpdateDto bookingForUpdateDto)
         {
             var bookingEntity = _mapper.Map<Booking>(bookingForUpdateDto);
 
@@ -107,7 +107,7 @@ namespace StaySphere.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteBooking(int id)
+        public async Task DeleteBookingAsync(int id)
         {
             var booking = await _context.Bookings.FirstOrDefaultAsync(x => x.Id == id);
             if (booking is not null)
