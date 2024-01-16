@@ -49,12 +49,15 @@ namespace StaySphere.Api.Controllers
         {
             if (id != booking.Id)
             {
-                return BadRequest(
-                    $"Route id: {id} does not match with parameter id: {booking.Id}.");
+                return BadRequest($"Route id: {id} does not match with parameter id: {booking.Id}.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
             }
 
             _bookingService.UpdateBookingAsync(booking);
-
             return NoContent();
         }
 
