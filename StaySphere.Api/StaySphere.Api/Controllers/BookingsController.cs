@@ -26,17 +26,16 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetBookingById")]
-        public ActionResult<BookingDto> Get(int id)
+        public async Task<ActionResult<BookingDto>> Get(int id)
         {
-            var booking = _bookingService.GetBookingById(id);
-
+            var booking = await _bookingService.GetBookingByIdAsync(id);
             return Ok(booking);
         }
 
         [HttpPost]
         public ActionResult Post(BookingForCreateDto booking)
         {
-            _bookingService.CreateBooking(booking);
+            _bookingService.CreateBookingAsync(booking);
 
             return StatusCode(201);
         }
@@ -50,7 +49,7 @@ namespace StaySphere.Api.Controllers
                     $"Route id: {id} does not match with parameter id: {booking.Id}.");
             }
 
-            _bookingService.UpdateBooking(booking);
+            _bookingService.UpdateBookingAsync(booking);
 
             return NoContent();
         }
@@ -58,7 +57,7 @@ namespace StaySphere.Api.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            _bookingService.DeleteBooking(id);
+            _bookingService.DeleteBookingAsync(id);
 
             return NoContent();
         }
