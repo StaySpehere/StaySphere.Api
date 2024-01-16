@@ -6,10 +6,10 @@ namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IBookingService
     {
-        Task<PaginatedList<BookingDto>>GetBookings(BookingResourceParameters bookingResourceParameters);
-        Task<BookingDto?> GetBookingById(int id);
-        Task<BookingDto> CreateBooking(BookingForCreateDto bookingForCreateDto);
-        Task UpdateBooking(BookingForUpdateDto bookingForUpdateDto);
-        Task DeleteBooking(int id); 
+        Task<PaginatedList<BookingDto>> GetBookingsAsync(BookingResourceParameters bookingResourceParameters);
+        Task<BookingDto?> GetBookingByIdAsync(int id);
+        Task<BookingDto> CreateBookingAsync(BookingForCreateDto bookingForCreateDto);
+        Task UpdateBookingAsync(BookingForUpdateDto bookingForUpdateDto);
+        Task DeleteBookingAsync(int id);
     }
 }
