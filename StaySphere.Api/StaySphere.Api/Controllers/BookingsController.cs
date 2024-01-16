@@ -33,10 +33,14 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(BookingForCreateDto booking)
+        public ActionResult Post([FromBody] BookingForCreateDto booking)
         {
-            _bookingService.CreateBookingAsync(booking);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            _bookingService.CreateBookingAsync(booking);
             return StatusCode(201);
         }
 
