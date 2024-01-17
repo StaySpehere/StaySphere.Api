@@ -18,27 +18,29 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<BookingDto>> GetBookingsAsync(
+        public async Task<ActionResult<IEnumerable<BookingDto>>> GetBookingsAsync(
               [FromQuery] BookingResourceParameters bookingResourceParameters)
         {
-            var bookings = _bookingService.GetBookings(bookingResourceParameters);
-
+            var bookings = await _bookingService.GetBookingsAsync(bookingResourceParameters);
             return Ok(bookings);
         }
 
         [HttpGet("{id}", Name = "GetBookingById")]
-        public ActionResult<BookingDto> Get(int id)
+        public async Task<ActionResult<BookingDto>> Get(int id)
         {
-            var booking = _bookingService.GetBookingById(id);
-
+            var booking = await _bookingService.GetBookingByIdAsync(id);
             return Ok(booking);
         }
 
         [HttpPost]
-        public ActionResult Post(BookingForCreateDto booking)
+        public ActionResult Post([FromBody] BookingForCreateDto booking)
         {
-            _bookingService.CreateBooking(booking);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            _bookingService.CreateBookingAsync(booking);
             return StatusCode(201);
         }
 
@@ -47,20 +49,22 @@ namespace StaySphere.Api.Controllers
         {
             if (id != booking.Id)
             {
-                return BadRequest(
-                    $"Route id: {id} does not match with parameter id: {booking.Id}.");
+                return BadRequest($"Route id: {id} does not match with parameter id: {booking.Id}.");
             }
 
-            _bookingService.UpdateBooking(booking);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            _bookingService.UpdateBookingAsync(booking);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            _bookingService.DeleteBooking(id);
-
+            _bookingService.DeleteBookingAsync(id);
             return NoContent();
         }
     }

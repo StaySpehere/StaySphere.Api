@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Position;
 using StaySphere.Domain.Interfaces.Services;
