@@ -58,7 +58,7 @@ namespace StaySphere.Services
 
             return new PaginatedList<CategoryDto>(categoryDtos, categories.TotalCount, categories.CurrentPage, categories.PageSize);
         }
-        public async Task<CategoryDto?> GetCategoryById(int id)
+        public async Task<CategoryDto?> GetCategoryByIdAsync(int id)
         {
             var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
 
