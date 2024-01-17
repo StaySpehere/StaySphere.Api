@@ -22,7 +22,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<CategoryDto>> GetCategories(CategoryResourceParameters categoryResourceParameters)
+        public async Task<PaginatedList<CategoryDto>> GetCategoriesAsync(CategoryResourceParameters categoryResourceParameters)
         {
             var query = _context.Categories.AsQueryable();
 
