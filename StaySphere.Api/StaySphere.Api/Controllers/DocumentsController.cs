@@ -33,10 +33,9 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] DocumentForCreateDto document)
+        public async Task<ActionResult> Post([FromBody] DocumentForCreateDto document)
         {
-            _documentService.CreateDocument(document);
-
+            await  _documentService.CreateDocumentAsync(document);
             return StatusCode(201);
         }
 
