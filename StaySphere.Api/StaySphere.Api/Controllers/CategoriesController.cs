@@ -19,11 +19,10 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoryDto>> GetCategoriesAsync(
-               [FromQuery] CategoryResourceParameters categoryResourceParameters)
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(
+               [FromQuery] CategoryResourceParameters parameters)
         {
-            var categories = _categoryService.GetCategories(categoryResourceParameters);
-
+            var categories = await _categoryService.GetCategoriesAsync(parameters);
             return Ok(categories);
         }
 
