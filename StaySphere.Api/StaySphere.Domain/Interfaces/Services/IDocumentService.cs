@@ -10,6 +10,6 @@ namespace StaySphere.Domain.Interfaces.Services
         Task<DocumentDto?> GetDocumentByIdAsync(int id);
         Task<DocumentDto> CreateDocumentAsync(DocumentForCreateDto documentForCreateDto);
         Task UpdateDocumentAsync(DocumentForUpdateDto documentForUpdateDto);
-        Task DeleteDocument(int id);
+        Task DeleteDocumentAsync(int id);
     }
 }
