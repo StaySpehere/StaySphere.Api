@@ -6,7 +6,7 @@ namespace StaySphere.Domain.Interfaces.Services
 {
     public interface ICategoryService
     {
-        Task<PaginatedList<CategoryDto>> GetCategories(CategoryResourceParameters resourceParameters);
+        Task<PaginatedList<CategoryDto>> GetCategoriesAsync(CategoryResourceParameters resourceParameters);
         Task<CategoryDto?> GetCategoryById(int id);
         Task<CategoryDto> CreateCategory(CategoryForCreateDto categoryForCreateDto);
         Task UpdateCategory(CategoryForUpdateDto categoryForUpdateDto);
