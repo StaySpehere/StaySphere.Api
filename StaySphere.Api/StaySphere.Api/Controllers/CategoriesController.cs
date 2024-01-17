@@ -34,10 +34,9 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] CategoryForCreateDto category)
+        public async Task<ActionResult> Post([FromBody] CategoryForCreateDto category)
         {
-            _categoryService.CreateCategory(category);
-
+            await _categoryService.CreateCategoryAsync(category);
             return StatusCode(201);
         }
 
