@@ -9,7 +9,7 @@ namespace StaySphere.Domain.Interfaces.Services
         Task<PaginatedList<CategoryDto>> GetCategoriesAsync(CategoryResourceParameters resourceParameters);
         Task<CategoryDto?> GetCategoryByIdAsync(int id);
         Task<CategoryDto> CreateCategoryAsync(CategoryForCreateDto categoryForCreateDto);
-        Task UpdateCategory(CategoryForUpdateDto categoryForUpdateDto);
+        Task UpdateCategoryAsync(CategoryForUpdateDto categoryForUpdateDto);
         Task DeleteCategory(int id);
     }
 }
