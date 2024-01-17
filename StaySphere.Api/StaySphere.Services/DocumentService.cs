@@ -21,7 +21,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<DocumentDto>> GetDocuments(DocumentResourceParameters documentResourceParameters)
+        public async Task<PaginatedList<DocumentDto>> GetDocumentsAsync(DocumentResourceParameters documentResourceParameters)
         {
             var query = _context.Documents.AsQueryable();
 
