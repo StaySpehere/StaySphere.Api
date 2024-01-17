@@ -81,7 +81,7 @@ namespace StaySphere.Services
 
             return categoryDto;
         }
-        public async Task UpdateCategory(CategoryForUpdateDto categoryForUpdateDto)
+        public async Task UpdateCategoryAsync(CategoryForUpdateDto categoryForUpdateDto)
         {
             var categoryEntity = _mapper.Map<Category>(categoryForUpdateDto);
 
