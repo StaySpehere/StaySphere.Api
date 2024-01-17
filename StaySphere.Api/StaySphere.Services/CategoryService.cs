@@ -70,7 +70,7 @@ namespace StaySphere.Services
             var categoryDto = _mapper.Map<CategoryDto>(category);
             return categoryDto;
         }
-        public async Task<CategoryDto> CreateCategory(CategoryForCreateDto categoryForCreateDto)
+        public async Task<CategoryDto> CreateCategoryAsync(CategoryForCreateDto categoryForCreateDto)
         {
             var categoryEntity = _mapper.Map<Category>(categoryForCreateDto);
 
