@@ -26,10 +26,9 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetDocumentById")]
-        public ActionResult<DocumentDto> Get(int id)
+        public async Task<ActionResult<DocumentDto>> Get(int id)
         {
-            var document = _documentService.GetDocumentById(id);
-
+            var document = await _documentService.GetDocumentByIdAsync(id);
             return Ok(document);
         }
 
