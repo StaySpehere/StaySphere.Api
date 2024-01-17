@@ -10,6 +10,6 @@ namespace StaySphere.Domain.Interfaces.Services
         Task<CategoryDto?> GetCategoryByIdAsync(int id);
         Task<CategoryDto> CreateCategoryAsync(CategoryForCreateDto categoryForCreateDto);
         Task UpdateCategoryAsync(CategoryForUpdateDto categoryForUpdateDto);
-        Task DeleteCategory(int id);
+        Task DeleteCategoryAsync(int id);
     }
 }
