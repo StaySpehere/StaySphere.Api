@@ -78,7 +78,7 @@ namespace StaySphere.Services
             _context.Documents.Update(documentEntity);
             await _context.SaveChangesAsync();
         }
-        public async Task DeleteDocument(int id)
+        public async Task DeleteDocumentAsync(int id)
         {
             var document = await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
 
