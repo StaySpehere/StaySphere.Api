@@ -61,7 +61,7 @@ namespace StaySphere.Services
             var documentDto = _mapper.Map<DocumentDto>(documents);
             return documentDto;
         }
-        public async Task<DocumentDto> CreateDocument(DocumentForCreateDto documentForCreateDto)
+        public async Task<DocumentDto> CreateDocumentAsync(DocumentForCreateDto documentForCreateDto)
         {
             var documentEntity = _mapper.Map<Document>(documentForCreateDto);
 
