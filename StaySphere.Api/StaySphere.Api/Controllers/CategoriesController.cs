@@ -27,10 +27,9 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetCategoryById")]
-        public ActionResult<CategoryDto> Get(int id)
+        public async Task<ActionResult<CategoryDto>> Get(int id)
         {
-            var category = _categoryService.GetCategoryById(id);
-
+            var category = await _categoryService.GetCategoryByIdAsync(id);
             return Ok(category);
         }
 
