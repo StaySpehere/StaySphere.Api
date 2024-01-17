@@ -49,7 +49,7 @@ namespace StaySphere.Services
             return new PaginatedList<DocumentDto>(documentDtos, documents.TotalCount, documents.CurrentPage, documents.PageSize);
         }
 
-        public async Task<DocumentDto?> GetDocumentById(int id)
+        public async Task<DocumentDto?> GetDocumentByIdAsync(int id)
         {
             var documents = await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
 
