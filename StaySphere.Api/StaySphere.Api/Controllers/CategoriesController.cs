@@ -41,15 +41,14 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] CategoryForUpdateDto category)
+        public async Task<ActionResult> Put(int id, [FromBody] CategoryForUpdateDto category)
         {
             if (id != category.Id)
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {category.Id}.");
             }
-            _categoryService.UpdateCategory(category);
-
-            return NoContent();
+           await _categoryService.UpdateCategoryAsync(category);
+           return NoContent();
         }
 
         [HttpDelete("{id}")]
