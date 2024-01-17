@@ -88,7 +88,7 @@ namespace StaySphere.Services
             _context.Categories.Update(categoryEntity);
             await _context.SaveChangesAsync();
         }
-        public async Task DeleteCategory(int id)
+        public async Task DeleteCategoryAsync(int id)
         {
             var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
 
