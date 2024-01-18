@@ -52,9 +52,9 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _documentService.DeleteDocument(id);
+           await _documentService.DeleteDocumentAsync(id);
 
             return NoContent();
         }
