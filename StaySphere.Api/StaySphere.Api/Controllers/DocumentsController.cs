@@ -40,13 +40,13 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] DocumentForUpdateDto document)
+        public async Task<ActionResult> Put(int id, [FromBody] DocumentForUpdateDto document)
         {
             if (id != document.Id)
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {document.Id}.");
             }
-            _documentService.UpdateDocument(document);
+            await _documentService.UpdateDocumentAsync(document);
 
             return NoContent();
         }
