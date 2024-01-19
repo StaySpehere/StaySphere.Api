@@ -80,7 +80,7 @@ namespace StaySphere.Services
             return employeeDto;
         }
 
-        public async Task<EmployeeDto> CreateEmployee(EmployeeForCreateDto employeeForCreateDto)
+        public async Task<EmployeeDto> CreateEmployeeAsync(EmployeeForCreateDto employeeForCreateDto)
         {
             var employeeEntity = _mapper.Map<Employee>(employeeForCreateDto);
 
