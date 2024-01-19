@@ -6,11 +6,6 @@ using System.Text;
 
 namespace StaySphere.Api.Controllers
 {
-    public class LoginRequest
-    {
-        public string Login { get; set; }
-        public string Password { get; set; }
-    }
     [Route("api/auth")]
     [ApiController]
     public class AuthenticationController : ControllerBase
