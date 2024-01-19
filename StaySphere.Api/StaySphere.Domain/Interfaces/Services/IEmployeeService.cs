@@ -6,7 +6,7 @@ namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IEmployeeService
     {
-        Task<PaginatedList<EmployeeDto>> GetEmployees(EmployeeResourceParameters employeeResourceParameters);
+        Task<PaginatedList<EmployeeDto>> GetEmployeesAsync(EmployeeResourceParameters employeeResourceParameters);
         Task<EmployeeDto?> GetEmployeeById(int id);
         Task<EmployeeDto> CreateEmployee(EmployeeForCreateDto employeeForCreateDto);
         Task UpdateEmployee(EmployeeForUpdateDto employeeForUpdateDto);
