@@ -9,7 +9,7 @@ namespace StaySphere.Domain.Interfaces.Services
         Task<PaginatedList<GuestDto>> GetGuestsAsync(GuestResourceParameters guestResourceParameters);
         Task<GuestDto?> GetGuestByIdAsync(int id);
         Task<GuestDto> CreateGuestAsync(GuestForCreateDto guestForCreateDto);
-        Task UpdateGuest(GuestForUpdateDto guestForUpdateDto);
+        Task UpdateGuestAsync(GuestForUpdateDto guestForUpdateDto);
         Task DeleteGuest(int id);
     }
 }
