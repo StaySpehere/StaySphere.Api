@@ -18,11 +18,10 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<GuestDto>> GetGuestAsync(
+        public async Task<ActionResult<IEnumerable<GuestDto>>> GetGuestAsync(
                [FromQuery] GuestResourceParameters guestResourceParameters)
         {
-            var guests = _guestService.GetGuests(guestResourceParameters);
-
+            var guests = await _guestService.GetGuestsAsync(guestResourceParameters);
             return Ok(guests);
         }
         [HttpGet("{id}", Name = "GetGuestById")]
