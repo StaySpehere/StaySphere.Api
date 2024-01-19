@@ -34,10 +34,9 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] EmployeeForCreateDto employee)
+        public async Task<ActionResult> Post([FromBody] EmployeeForCreateDto employee)
         {
-            _employeeService.CreateEmployee(employee);
-
+            await _employeeService.CreateEmployeeAsync(employee);
             return StatusCode(201);
         }
 
