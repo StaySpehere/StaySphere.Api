@@ -9,7 +9,7 @@ namespace StaySphere.Domain.Interfaces.Services
         Task<PaginatedList<PositionDto>> GetPositionsAsync(PositionResourceParameters positionResourceParameters);
         Task<PositionDto?> GetPositionByIdAsync(int id);
         Task<PositionDto> CreatePositionAsync(PositionForCreateDto positionForCreateDto);
-        Task UpdatePosition(PositionForUpdateDto positionForUpdateDto);
+        Task UpdatePositionAsync(PositionForUpdateDto positionForUpdateDto);
         Task DeletePosition(int id);
     }
 }
