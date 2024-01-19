@@ -6,7 +6,7 @@ namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IPositionService
     {
-        Task<PaginatedList<PositionDto>> GetPositions(PositionResourceParameters positionResourceParameters);
+        Task<PaginatedList<PositionDto>> GetPositionsAsync(PositionResourceParameters positionResourceParameters);
         Task<PositionDto?> GetPositionById(int id);
         Task<PositionDto> CreatePosition(PositionForCreateDto positionForCreateDto);
         Task UpdatePosition(PositionForUpdateDto positionForUpdateDto);
