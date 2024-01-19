@@ -67,7 +67,7 @@ namespace StaySphere.Services
             return new PaginatedList<EmployeeDto>(employeeDtos, employees.TotalCount, employees.CurrentPage, employees.PageSize);
         }
 
-        public async Task<EmployeeDto?> GetEmployeeById(int id)
+        public async Task<EmployeeDto?> GetEmployeeByIdAsync(int id)
         {
             var employees = await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
 
