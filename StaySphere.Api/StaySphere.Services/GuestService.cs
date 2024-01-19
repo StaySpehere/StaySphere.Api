@@ -50,7 +50,7 @@ namespace StaySphere.Services
             return new PaginatedList<GuestDto>(guestDtos, guests.TotalCount, guests.CurrentPage, guests.PageSize);
         }
 
-        public async Task<GuestDto?> GetGuestById(int id)
+        public async Task<GuestDto?> GetGuestByIdAsync(int id)
         {
             var guests = await _context.Guests.FirstOrDefaultAsync(x => x.Id == id);
 
