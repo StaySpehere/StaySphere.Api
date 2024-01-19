@@ -28,7 +28,6 @@ namespace StaySphere.Api.Controllers
         public async Task<ActionResult<GuestDto>> Get(int id)
         {
             var guest = await _guestService.GetGuestByIdAsync(id);
-
             return Ok(guest);
 
         }
@@ -47,16 +46,15 @@ namespace StaySphere.Api.Controllers
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {guest.Id}.");
             }
-            await _guestService.UpdateGuestAsync(guest);
 
+            await _guestService.UpdateGuestAsync(guest);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _guestService.DeleteGuest(id);
-
+           await _guestService.DeleteGuestAsync(id);
             return NoContent();
         }
     }
