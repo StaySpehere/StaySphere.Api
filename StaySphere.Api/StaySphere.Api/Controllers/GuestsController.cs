@@ -41,13 +41,13 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] GuestForUpdateDto guest)
+        public async Task<ActionResult> Put(int id, [FromBody] GuestForUpdateDto guest)
         {
             if (id != guest.Id)
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {guest.Id}.");
             }
-            _guestService.UpdateGuest(guest);
+            await _guestService.UpdateGuestAsync(guest);
 
             return NoContent();
         }
