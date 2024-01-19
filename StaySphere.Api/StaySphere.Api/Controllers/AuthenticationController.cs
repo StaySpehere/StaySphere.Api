@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using StaySphere.Api.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -10,39 +11,43 @@ namespace StaySphere.Api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        private readonly string _secretKey = "StaySphere-Sekret-Key777777777777";
+
         [HttpPost("login")]
         public async Task<ActionResult<string>> LoginAsync(LoginRequest request)
         {
             var user = Authenticate(request.Login, request.Password);
 
-            if (user is null)
+            if (user == null)
             {
                 return Unauthorized();
             }
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("StaySphere-Sekret-Key777777777777"));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var claimsForToken = new List<Claim>();
-            claimsForToken.Add(new Claim("sub", user.Phone));
-            claimsForToken.Add(new Claim("name", user.Name));
+            var claimsForToken = new List<Claim>
+            {
+                new Claim("sub", user.Phone),
+                new Claim("name", user.Name)
+            };
 
             var jwtSecurityToken = new JwtSecurityToken(
-                "StaySphere-api",
-                "StaySphere",
-                claimsForToken,
-                DateTime.UtcNow,
-                DateTime.UtcNow.AddMinutes(2),
-                signingCredentials);
+                issuer: "StaySphere-api",
+                audience: "StaySphere",
+                claims: claimsForToken,
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(30),
+                signingCredentials: signingCredentials);
 
-            var token = new JwtSecurityTokenHandler()
-                .WriteToken(jwtSecurityToken);
+            var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
 
-            return Ok(token);
+            return await Task.FromResult(Ok(token));
         }
-        static User Authenticate(string login, string password)
+
+        private static User Authenticate(string? login, string? password)
         {
-            return new User()
+            return new User
             {
                 Login = login,
                 Password = password,
