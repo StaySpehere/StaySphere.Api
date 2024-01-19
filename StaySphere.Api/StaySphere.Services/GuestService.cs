@@ -63,7 +63,7 @@ namespace StaySphere.Services
             return guestDtos;
         }
 
-        public async Task<GuestDto> CreateGuest(GuestForCreateDto guestForCreateDto)
+        public async Task<GuestDto> CreateGuestAsync(GuestForCreateDto guestForCreateDto)
         {
             var guestEntity = _mapper.Map<Guest>(guestForCreateDto);
 
