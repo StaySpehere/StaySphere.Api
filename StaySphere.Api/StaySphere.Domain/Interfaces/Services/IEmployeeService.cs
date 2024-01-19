@@ -9,7 +9,7 @@ namespace StaySphere.Domain.Interfaces.Services
         Task<PaginatedList<EmployeeDto>> GetEmployeesAsync(EmployeeResourceParameters employeeResourceParameters);
         Task<EmployeeDto?> GetEmployeeByIdAsync(int id);
         Task<EmployeeDto> CreateEmployeeAsync(EmployeeForCreateDto employeeForCreateDto);
-        Task UpdateEmployee(EmployeeForUpdateDto employeeForUpdateDto);
+        Task UpdateEmployeeAsync(EmployeeForUpdateDto employeeForUpdateDto);
         Task DeleteEmployee(int id);
     }
 }
