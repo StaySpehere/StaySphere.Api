@@ -53,10 +53,9 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _employeeService.DeleteEmployee(id);
-
+            await _employeeService.DeleteEmployeeAsync(id);
             return NoContent();
         }
     }
