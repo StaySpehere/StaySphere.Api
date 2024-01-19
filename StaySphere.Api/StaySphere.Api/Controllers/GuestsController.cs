@@ -34,11 +34,10 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] GuestForCreateDto guest)
+        public async Task<ActionResult> Post([FromBody] GuestForCreateDto guest)
         {
-            _guestService.CreateGuest(guest);
-
-            return NoContent();
+           await _guestService.CreateGuestAsync(guest);
+           return NoContent();
         }
 
         [HttpPut("{id}")]
