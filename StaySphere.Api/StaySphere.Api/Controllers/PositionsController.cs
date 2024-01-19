@@ -19,46 +19,42 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<PositionDto>> GetPositionsAsync(
+        public async Task<ActionResult<IEnumerable<PositionDto>>> GetPositionsAsync(
               [FromQuery] PositionResourceParameters positionResourceParameters)
         {
-            var positions = _positionService.GetPositions(positionResourceParameters);
-
+            var positions = await _positionService.GetPositionsAsync(positionResourceParameters);
             return Ok(positions);
         }
         [HttpGet("{id}", Name = "GetPositionById")]
-        public ActionResult<PositionDto> Get(int id)
+        public async Task<ActionResult<PositionDto>> Get(int id)
         {
-            var position = _positionService.GetPositionById(id);
-
+            var position = _positionService.GetPositionByIdAsync(id);
             return Ok(position);
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] PositionForCreateDto position)
+        public async Task<ActionResult> Post([FromBody] PositionForCreateDto position)
         {
-            _positionService.CreatePosition(position);
-
+            await _positionService.CreatePositionAsync(position);
             return StatusCode(201);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] PositionForUpdateDto position)
+        public async Task<ActionResult> Put(int id, [FromBody] PositionForUpdateDto position)
         {
             if (id != position.Id)
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {position.Id}.");
             }
-            _positionService.UpdatePosition(position);
 
+            await _positionService.UpdatePositionAsync(position);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _positionService.DeletePosition(id);
-
+            await _positionService.DeletePositionAsync(id);
             return NoContent();
         }
     }
