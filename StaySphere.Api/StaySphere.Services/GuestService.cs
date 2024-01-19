@@ -74,7 +74,7 @@ namespace StaySphere.Services
             return guestDto;
         }
 
-        public async Task UpdateGuest(GuestForUpdateDto guestForUpdateDto)
+        public async Task UpdateGuestAsync(GuestForUpdateDto guestForUpdateDto)
         {
             var guestEntity = _mapper.Map<Guest>(guestForUpdateDto);
 
