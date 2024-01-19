@@ -21,7 +21,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<PositionDto>> GetPositions(PositionResourceParameters positionResourceParameters)
+        public async Task<PaginatedList<PositionDto>> GetPositionsAsync(PositionResourceParameters positionResourceParameters)
         {
             var query = _context.Positions.AsQueryable();
             if (positionResourceParameters.Salary is not null)
