@@ -35,4 +35,8 @@
     <ProjectReference Include="..\StaySphere.Services\StaySphere.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
