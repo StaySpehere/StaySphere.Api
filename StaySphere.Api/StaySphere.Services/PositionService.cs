@@ -57,7 +57,7 @@ namespace StaySphere.Services
             return new PaginatedList<PositionDto>(positionsDtos, positions.TotalCount, positions.CurrentPage, positions.PageSize);
         }
 
-        public async Task<PositionDto?> GetPositionById(int id)
+        public async Task<PositionDto?> GetPositionByIdAsync(int id)
         {
             var positions = await _context.Positions.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -70,7 +70,7 @@ namespace StaySphere.Services
             return positionDtos;
         }
 
-        public async Task<PositionDto> CreatePosition(PositionForCreateDto positionForCreateDto)
+        public async Task<PositionDto> CreatePositionAsync(PositionForCreateDto positionForCreateDto)
         {
             var positionEntity = _mapper.Map<Position>(positionForCreateDto);
 
@@ -81,7 +81,7 @@ namespace StaySphere.Services
             return positionDto;
         }
 
-        public async Task UpdatePosition(PositionForUpdateDto positionForUpdateDto)
+        public async Task UpdatePositionAsync(PositionForUpdateDto positionForUpdateDto)
         {
             var positionEntity = _mapper.Map<Position>(positionForUpdateDto);
 
@@ -89,7 +89,7 @@ namespace StaySphere.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeletePosition(int id)
+        public async Task DeletePositionAsync(int id)
         {
             var position = await _context.Positions.FirstOrDefaultAsync(x => x.Id == id);
 
