@@ -1,9 +1,10 @@
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using System.Text.Json;
 
 namespace StaySphere.Api.Controllers
 {
@@ -19,10 +20,14 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoryDto>> GetCategoriesAsync(
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(
                [FromQuery] CategoryResourceParameters categoryResourceParameters)
         {
-            var categories = _categoryService.GetCategories(categoryResourceParameters);
+            var categories = await _categoryService.GetCategories(categoryResourceParameters);
+
+            var metaData = GetPaginationMetaData(categories);
+
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(categories);
         }
@@ -61,6 +66,16 @@ namespace StaySphere.Api.Controllers
             _categoryService.DeleteCategory(id);
 
             return NoContent();
+        }
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<CategoryDto> categoryDtos)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = categoryDtos.TotalCount,
+                PageSize = categoryDtos.PageSize,
+                CurrentPage = categoryDtos.CurrentPage,
+                TotalPages = categoryDtos.TotalPages,
+            };
         }
     }
 }

@@ -17,7 +17,8 @@ namespace StaySphere.Infrastructure.Persistence.Configurations
 
             builder.Property(r => r.Comment)
                 .HasMaxLength(255);
-            builder.Property(r => r.Grade);
+            builder.Property(r => r.Grade)
+                .HasColumnType("decimal(18,4)");
         }
     }
 }

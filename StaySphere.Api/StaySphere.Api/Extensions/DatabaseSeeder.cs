@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Microsoft.EntityFrameworkCore;
 using StaySphere.Domain.Entities;
 using StaySphere.Infrastructure.Persistence;
 
@@ -7,9 +8,11 @@ namespace StaySphere.Api.Extensions
     public static class DatabaseSeeder
     {
         private static readonly Faker _faker = new Faker();
-
-        public static void SeedData(StaySphereDbContext context)
+        public static void SeedData(this IServiceCollection _,IServiceProvider serviceProvider)
         {
+            var options = serviceProvider.GetRequiredService<DbContextOptions<StaySphereDbContext>>();
+            using var context= new StaySphereDbContext(options);
+
             CreatEmployees(context);
             CreatDocuments(context);
             CreatCategories(context);

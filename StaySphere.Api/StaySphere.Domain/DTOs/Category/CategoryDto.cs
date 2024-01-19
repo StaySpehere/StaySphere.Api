@@ -5,6 +5,6 @@ namespace StaySphere.Domain.DTOs.Category
     public record CategoryDto(
         int Id,
         string Name,
-        int NumberOfRooms,
-        ICollection<RoomDto> Rooms);
+        //int NumberOfRooms,
+    ICollection<RoomDto> Rooms);
 }

@@ -8,8 +8,8 @@ namespace StaySphere.Domain.Mappings
     {
         public CategoryMappings()
         {
-            CreateMap<Category, CategoryDto>()
-                 .ForMember(x => x.NumberOfRooms, r => r.MapFrom(x => x.Rooms.Count));
+            CreateMap<Category, CategoryDto>();
+                //.ForMember(x => x.NumberOfRooms, r => r.MapFrom(x => x.Rooms.Count));
             CreateMap<CategoryDto, Category>();
             CreateMap<CategoryForCreateDto, Category>();
             CreateMap<CategoryForUpdateDto, Category>();

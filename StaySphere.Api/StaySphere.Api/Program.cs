@@ -1,16 +1,26 @@
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using StaySphere.Api.Extensions;
+using StaySphere.Api.Middlewares;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//builder.Host.UseSerilog();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers()
+    .AddNewtonsoftJson()
+    .AddXmlSerializerFormatters();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
+builder.Services.ConfigureLogger();
+builder.Services.ConfigureRepositories();
+builder.Services.ConfigureServices();
 builder.Services.ConfigureDatabaseContext();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options => options.TokenValidationParameters = new()
     {
@@ -24,12 +34,20 @@ builder.Services.AddAuthentication("Bearer")
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    builder.Services.SeedData(services);
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
