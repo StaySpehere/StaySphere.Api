@@ -91,7 +91,7 @@ namespace StaySphere.Services
             return employeeDto;
         }
 
-        public async Task UpdateEmployee(EmployeeForUpdateDto employeeForUpdateDto)
+        public async Task UpdateEmployeeAsync(EmployeeForUpdateDto employeeForUpdateDto)
         {
             var employeeEntity = _mapper.Map<Employee>(employeeForUpdateDto);
 
