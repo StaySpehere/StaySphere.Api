@@ -25,9 +25,9 @@ namespace StaySphere.Api.Controllers
             return Ok(guests);
         }
         [HttpGet("{id}", Name = "GetGuestById")]
-        public ActionResult<GuestDto> Get(int id)
+        public async Task<ActionResult<GuestDto>> Get(int id)
         {
-            var guest = _guestService.GetGuestById(id);
+            var guest = await _guestService.GetGuestById(id);
 
             return Ok(guest);
 
