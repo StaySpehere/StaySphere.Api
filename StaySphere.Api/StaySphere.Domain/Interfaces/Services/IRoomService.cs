@@ -6,10 +6,10 @@ namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IRoomService
     {
-        Task<PaginatedList<RoomDto>> GetRooms(RoomResourceParameters roomResourceParameters);
-        Task<RoomDto?> GetRoomById(int id);
-        Task<RoomDto> CreateRoom(RoomForCreateDto roomForCreateDto);
-        Task UpdateRoom(RoomForUpdateDto roomForUpdateDto);
-        Task DeleteRoom(int id);
+        Task<PaginatedList<RoomDto>> GetRoomsAsync(RoomResourceParameters roomResourceParameters);
+        Task<RoomDto?> GetRoomByIdAsync(int id);
+        Task<RoomDto> CreateRoomAsync(RoomForCreateDto roomForCreateDto);
+        Task UpdateRoomAsync(RoomForUpdateDto roomForUpdateDto);
+        Task DeleteRoomAsync(int id);
     }
 }
