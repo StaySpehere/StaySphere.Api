@@ -10,6 +10,6 @@ namespace StaySphere.Domain.Interfaces.Services
         Task<PositionDto?> GetPositionByIdAsync(int id);
         Task<PositionDto> CreatePositionAsync(PositionForCreateDto positionForCreateDto);
         Task UpdatePositionAsync(PositionForUpdateDto positionForUpdateDto);
-        Task DeletePosition(int id);
+        Task DeletePositionAsync(int id);
     }
 }
