@@ -99,7 +99,7 @@ namespace StaySphere.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteEmployee(int id)
+        public async Task DeleteEmployeeAsync(int id)
         {
             var employee = await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
 
