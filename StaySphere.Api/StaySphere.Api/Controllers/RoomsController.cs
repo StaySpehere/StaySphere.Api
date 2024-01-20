@@ -1,8 +1,12 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using StaySphere.Domain.DTOs.Booking;
 using StaySphere.Domain.DTOs.Room;
+using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
 
 namespace StaySphere.Api.Controllers
@@ -23,6 +27,9 @@ namespace StaySphere.Api.Controllers
                [FromQuery] RoomResourceParameters roomResourceParameters)
         {
             var rooms = await _roomService.GetRoomsAsync(roomResourceParameters);
+            var metaData = await GetPagenationMetaDataAsync(rooms);
+
+            Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metaData));
             return Ok(rooms);
         }
 
@@ -57,6 +64,23 @@ namespace StaySphere.Api.Controllers
         {
             await _roomService.DeleteRoomAsync(id);
             return NoContent();
+        }
+        private async Task<PagenationMetaData> GetPagenationMetaDataAsync(PaginatedList<RoomDto> roomDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = roomDtOs.TotalCount,
+                PageSize = roomDtOs.PageSize,
+                CurrentPage = roomDtOs.CurrentPage,
+                TotalPages = roomDtOs.TotalPages,
+            };
+        }
+        class PagenationMetaData
+        {
+            public int Totalcount { get; set; }
+            public int PageSize { get; set; }
+            public int CurrentPage { get; set; }
+            public int TotalPages { get; set; }
         }
     }
 }
