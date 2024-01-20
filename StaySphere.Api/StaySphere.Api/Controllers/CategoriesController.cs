@@ -23,15 +23,12 @@ namespace StaySphere.Api.Controllers
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(
                [FromQuery] CategoryResourceParameters categoryResourceParameters)
         {
-            var categories = await _categoryService.GetCategories(categoryResourceParameters);
+            var categories = await _categoryService.GetCategoriesAsync(categoryResourceParameters);
 
             var metaData = GetPaginationMetaData(categories);
 
             Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
-               [FromQuery] CategoryResourceParameters parameters)
-        {
-            var categories = await _categoryService.GetCategoriesAsync(parameters);
             return Ok(categories);
         }
 
@@ -56,8 +53,8 @@ namespace StaySphere.Api.Controllers
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {category.Id}.");
             }
-           await _categoryService.UpdateCategoryAsync(category);
-           return NoContent();
+            await _categoryService.UpdateCategoryAsync(category);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
