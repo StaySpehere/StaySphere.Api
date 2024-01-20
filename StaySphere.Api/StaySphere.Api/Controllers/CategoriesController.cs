@@ -29,42 +29,41 @@ namespace StaySphere.Api.Controllers
 
             Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
+               [FromQuery] CategoryResourceParameters parameters)
+        {
+            var categories = await _categoryService.GetCategoriesAsync(parameters);
             return Ok(categories);
         }
 
         [HttpGet("{id}", Name = "GetCategoryById")]
-        public ActionResult<CategoryDto> Get(int id)
+        public async Task<ActionResult<CategoryDto>> Get(int id)
         {
-            var category = _categoryService.GetCategoryById(id);
-
+            var category = await _categoryService.GetCategoryByIdAsync(id);
             return Ok(category);
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] CategoryForCreateDto category)
+        public async Task<ActionResult> Post([FromBody] CategoryForCreateDto category)
         {
-            _categoryService.CreateCategory(category);
-
+            await _categoryService.CreateCategoryAsync(category);
             return StatusCode(201);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] CategoryForUpdateDto category)
+        public async Task<ActionResult> Put(int id, [FromBody] CategoryForUpdateDto category)
         {
             if (id != category.Id)
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {category.Id}.");
             }
-            _categoryService.UpdateCategory(category);
-
-            return NoContent();
+           await _categoryService.UpdateCategoryAsync(category);
+           return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _categoryService.DeleteCategory(id);
-
+            await _categoryService.DeleteCategoryAsync(id);
             return NoContent();
         }
         private PagenationMetaData GetPaginationMetaData(PaginatedList<CategoryDto> categoryDtos)

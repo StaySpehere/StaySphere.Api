@@ -19,48 +19,44 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ReviewDto>> GetReviewAsync(
+        public async Task<ActionResult<IEnumerable<ReviewDto>>> GetReviewAsync(
                [FromQuery] ReviewResourceParameters reviewResourceParameters)
         {
-            var reviews = _reviewService.GetReviews(reviewResourceParameters);
-
+            var reviews = await _reviewService.GetReviewsAsync(reviewResourceParameters);
             return Ok(reviews);
         }
 
         [HttpGet("{id}", Name = "GetReviewById")]
-        public ActionResult<ReviewDto> Get(int id)
+        public async Task<ActionResult<ReviewDto>> Get(int id)
         {
-            var review = _reviewService.GetReviewById(id);
-
+            var review = await _reviewService.GetReviewByIdAsync(id);
             return Ok(review);
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] ReviewForCreateDto review)
+        public async Task<ActionResult> Post([FromBody] ReviewForCreateDto review)
         {
-            _reviewService.CreateReview(review);
-
+           await _reviewService.CreateReviewAsync(review);
             return StatusCode(201);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] ReviewForUpdateDto review)
+        public async Task<ActionResult> Put(int id, [FromBody] ReviewForUpdateDto review)
         {
             if (id != review.Id)
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {review.Id}.");
             }
-            _reviewService.UpdateReview(review);
 
+            await _reviewService.UpdateReviewAsync(review);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _reviewService.DeleteReview(id);
-
-            return NoContent();
+           await _reviewService.DeleteReviewAsync(id);
+           return NoContent();
         }
     }
 }

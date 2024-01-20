@@ -18,46 +18,43 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<DocumentDto>> GetDocumentsAsync(
+        public async Task<ActionResult<IEnumerable<DocumentDto>>> GetDocumentsAsync(
             [FromQuery] DocumentResourceParameters documentResourceParameters)
         {
-            var documents = _documentService.GetDocuments(documentResourceParameters);
-
+            var documents = await _documentService.GetDocumentsAsync(documentResourceParameters);
             return Ok(documents);
         }
 
         [HttpGet("{id}", Name = "GetDocumentById")]
-        public ActionResult<DocumentDto> Get(int id)
+        public async Task<ActionResult<DocumentDto>> Get(int id)
         {
-            var document = _documentService.GetDocumentById(id);
-
+            var document = await _documentService.GetDocumentByIdAsync(id);
             return Ok(document);
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] DocumentForCreateDto document)
+        public async Task<ActionResult> Post([FromBody] DocumentForCreateDto document)
         {
-            _documentService.CreateDocument(document);
-
+            await  _documentService.CreateDocumentAsync(document);
             return StatusCode(201);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] DocumentForUpdateDto document)
+        public async Task<ActionResult> Put(int id, [FromBody] DocumentForUpdateDto document)
         {
             if (id != document.Id)
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {document.Id}.");
             }
-            _documentService.UpdateDocument(document);
+            await _documentService.UpdateDocumentAsync(document);
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _documentService.DeleteDocument(id);
+           await _documentService.DeleteDocumentAsync(id);
 
             return NoContent();
         }

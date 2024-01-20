@@ -22,7 +22,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<CategoryDto>> GetCategories(CategoryResourceParameters categoryResourceParameters)
+        public async Task<PaginatedList<CategoryDto>> GetCategoriesAsync(CategoryResourceParameters categoryResourceParameters)
         {
             var query = _context.Categories.AsQueryable();
 
@@ -58,7 +58,7 @@ namespace StaySphere.Services
 
             return new PaginatedList<CategoryDto>(categoryDtos, categories.TotalCount, categories.CurrentPage, categories.PageSize);
         }
-        public async Task<CategoryDto?> GetCategoryById(int id)
+        public async Task<CategoryDto?> GetCategoryByIdAsync(int id)
         {
             var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -70,7 +70,7 @@ namespace StaySphere.Services
             var categoryDto = _mapper.Map<CategoryDto>(category);
             return categoryDto;
         }
-        public async Task<CategoryDto> CreateCategory(CategoryForCreateDto categoryForCreateDto)
+        public async Task<CategoryDto> CreateCategoryAsync(CategoryForCreateDto categoryForCreateDto)
         {
             var categoryEntity = _mapper.Map<Category>(categoryForCreateDto);
 
@@ -81,14 +81,14 @@ namespace StaySphere.Services
 
             return categoryDto;
         }
-        public async Task UpdateCategory(CategoryForUpdateDto categoryForUpdateDto)
+        public async Task UpdateCategoryAsync(CategoryForUpdateDto categoryForUpdateDto)
         {
             var categoryEntity = _mapper.Map<Category>(categoryForUpdateDto);
 
             _context.Categories.Update(categoryEntity);
             await _context.SaveChangesAsync();
         }
-        public async Task DeleteCategory(int id)
+        public async Task DeleteCategoryAsync(int id)
         {
             var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
 

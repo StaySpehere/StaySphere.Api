@@ -21,7 +21,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<RoomDto>> GetRooms(RoomResourceParameters roomResourceParameters)
+        public async Task<PaginatedList<RoomDto>> GetRoomsAsync(RoomResourceParameters roomResourceParameters)
         {
             var query = _context.Rooms.AsQueryable();
 
@@ -50,7 +50,7 @@ namespace StaySphere.Services
             return new PaginatedList<RoomDto>(roomDtos, rooms.TotalCount, rooms.CurrentPage, rooms.PageSize);
         }
 
-        public async Task<RoomDto?> GetRoomById(int id)
+        public async Task<RoomDto?> GetRoomByIdAsync(int id)
         {
             var rooms = await _context.Rooms.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -63,7 +63,7 @@ namespace StaySphere.Services
             return roomDtos;
         }
 
-        public async Task<RoomDto> CreateRoom(RoomForCreateDto roomForCreateDto)
+        public async Task<RoomDto> CreateRoomAsync(RoomForCreateDto roomForCreateDto)
         {
             var roomEntity = _mapper.Map<Room>(roomForCreateDto);
 
@@ -74,7 +74,7 @@ namespace StaySphere.Services
             return roomDto;
         }
 
-        public async Task UpdateRoom(RoomForUpdateDto roomForUpdateDto)
+        public async Task UpdateRoomAsync(RoomForUpdateDto roomForUpdateDto)
         {
             var roomEntity = _mapper.Map<Room>(roomForUpdateDto);
 
@@ -82,7 +82,7 @@ namespace StaySphere.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteRoom(int id)
+        public async Task DeleteRoomAsync(int id)
         {
             var room = await _context.Rooms.FirstOrDefaultAsync(x => x.Id == id);
 

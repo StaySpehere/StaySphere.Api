@@ -21,7 +21,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<DocumentDto>> GetDocuments(DocumentResourceParameters documentResourceParameters)
+        public async Task<PaginatedList<DocumentDto>> GetDocumentsAsync(DocumentResourceParameters documentResourceParameters)
         {
             var query = _context.Documents.AsQueryable();
 
@@ -49,7 +49,7 @@ namespace StaySphere.Services
             return new PaginatedList<DocumentDto>(documentDtos, documents.TotalCount, documents.CurrentPage, documents.PageSize);
         }
 
-        public async Task<DocumentDto?> GetDocumentById(int id)
+        public async Task<DocumentDto?> GetDocumentByIdAsync(int id)
         {
             var documents = await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -61,7 +61,7 @@ namespace StaySphere.Services
             var documentDto = _mapper.Map<DocumentDto>(documents);
             return documentDto;
         }
-        public async Task<DocumentDto> CreateDocument(DocumentForCreateDto documentForCreateDto)
+        public async Task<DocumentDto> CreateDocumentAsync(DocumentForCreateDto documentForCreateDto)
         {
             var documentEntity = _mapper.Map<Document>(documentForCreateDto);
 
@@ -71,14 +71,14 @@ namespace StaySphere.Services
             var documentDto = _mapper.Map<DocumentDto>(documentEntity);
             return documentDto;
         }
-        public async Task UpdateDocument(DocumentForUpdateDto documentForUpdateDto)
+        public async Task UpdateDocumentAsync(DocumentForUpdateDto documentForUpdateDto)
         {
             var documentEntity = _mapper.Map<Document>(documentForUpdateDto);
 
             _context.Documents.Update(documentEntity);
             await _context.SaveChangesAsync();
         }
-        public async Task DeleteDocument(int id)
+        public async Task DeleteDocumentAsync(int id)
         {
             var document = await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
 

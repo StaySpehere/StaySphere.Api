@@ -18,47 +18,44 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<EmployeeDto>> GetEmployeesAsync(
+        public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetEmployeesAsync(
               [FromQuery] EmployeeResourceParameters employeeResourceParameters)
         {
-            var employees = _employeeService.GetEmployees(employeeResourceParameters);
+            var employees = await _employeeService.GetEmployeesAsync(employeeResourceParameters);
 
             return Ok(employees);
         }
 
         [HttpGet("{id}", Name = "GetEmployeeById")]
-        public ActionResult<EmployeeDto> Get(int id)
+        public async Task<ActionResult<EmployeeDto>> Get(int id)
         {
-            var employee = _employeeService.GetEmployeeById(id);
-
+            var employee = await _employeeService.GetEmployeeByIdAsync(id);
             return Ok(employee);
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] EmployeeForCreateDto employee)
+        public async Task<ActionResult> Post([FromBody] EmployeeForCreateDto employee)
         {
-            _employeeService.CreateEmployee(employee);
-
+            await _employeeService.CreateEmployeeAsync(employee);
             return StatusCode(201);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, EmployeeForUpdateDto employee)
+        public async Task<ActionResult> Put(int id, EmployeeForUpdateDto employee)
         {
             if (id != employee.Id)
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {employee.Id}.");
             }
-            _employeeService.UpdateEmployee(employee);
 
+            await _employeeService.UpdateEmployeeAsync(employee);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _employeeService.DeleteEmployee(id);
-
+            await _employeeService.DeleteEmployeeAsync(id);
             return NoContent();
         }
     }

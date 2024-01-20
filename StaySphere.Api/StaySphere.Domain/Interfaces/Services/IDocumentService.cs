@@ -6,10 +6,10 @@ namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IDocumentService
     {
-        Task<PaginatedList<DocumentDto>>GetDocuments(DocumentResourceParameters documentResourceParameters);
-        Task<DocumentDto?> GetDocumentById(int id);
-        Task<DocumentDto> CreateDocument(DocumentForCreateDto documentForCreateDto);
-        Task UpdateDocument(DocumentForUpdateDto documentForUpdateDto);
-        Task DeleteDocument(int id);
+        Task<PaginatedList<DocumentDto>>GetDocumentsAsync(DocumentResourceParameters documentResourceParameters);
+        Task<DocumentDto?> GetDocumentByIdAsync(int id);
+        Task<DocumentDto> CreateDocumentAsync(DocumentForCreateDto documentForCreateDto);
+        Task UpdateDocumentAsync(DocumentForUpdateDto documentForUpdateDto);
+        Task DeleteDocumentAsync(int id);
     }
 }
