@@ -6,10 +6,10 @@ namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IEmployeeService
     {
-        Task<PaginatedList<EmployeeDto>> GetEmployees(EmployeeResourceParameters employeeResourceParameters);
-        Task<EmployeeDto?> GetEmployeeById(int id);
-        Task<EmployeeDto> CreateEmployee(EmployeeForCreateDto employeeForCreateDto);
-        Task UpdateEmployee(EmployeeForUpdateDto employeeForUpdateDto);
-        Task DeleteEmployee(int id);
+        Task<PaginatedList<EmployeeDto>> GetEmployeesAsync(EmployeeResourceParameters employeeResourceParameters);
+        Task<EmployeeDto?> GetEmployeeByIdAsync(int id);
+        Task<EmployeeDto> CreateEmployeeAsync(EmployeeForCreateDto employeeForCreateDto);
+        Task UpdateEmployeeAsync(EmployeeForUpdateDto employeeForUpdateDto);
+        Task DeleteEmployeeAsync(int id);
     }
 }

@@ -21,7 +21,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<GuestDto>> GetGuests(GuestResourceParameters guestResourceParameters)
+        public async Task<PaginatedList<GuestDto>> GetGuestsAsync(GuestResourceParameters guestResourceParameters)
         {
             var query = _context.Guests.AsQueryable();
 
@@ -50,7 +50,7 @@ namespace StaySphere.Services
             return new PaginatedList<GuestDto>(guestDtos, guests.TotalCount, guests.CurrentPage, guests.PageSize);
         }
 
-        public async Task<GuestDto?> GetGuestById(int id)
+        public async Task<GuestDto?> GetGuestByIdAsync(int id)
         {
             var guests = await _context.Guests.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -63,7 +63,7 @@ namespace StaySphere.Services
             return guestDtos;
         }
 
-        public async Task<GuestDto> CreateGuest(GuestForCreateDto guestForCreateDto)
+        public async Task<GuestDto> CreateGuestAsync(GuestForCreateDto guestForCreateDto)
         {
             var guestEntity = _mapper.Map<Guest>(guestForCreateDto);
 
@@ -74,7 +74,7 @@ namespace StaySphere.Services
             return guestDto;
         }
 
-        public async Task UpdateGuest(GuestForUpdateDto guestForUpdateDto)
+        public async Task UpdateGuestAsync(GuestForUpdateDto guestForUpdateDto)
         {
             var guestEntity = _mapper.Map<Guest>(guestForUpdateDto);
 
@@ -82,7 +82,7 @@ namespace StaySphere.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteGuest(int id)
+        public async Task DeleteGuestAsync(int id)
         {
             var guest = await _context.Guests.FirstOrDefaultAsync(x => x.Id == id);
 

@@ -21,7 +21,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<EmployeeDto>> GetEmployees(EmployeeResourceParameters employeeResourceParameters)
+        public async Task<PaginatedList<EmployeeDto>> GetEmployeesAsync(EmployeeResourceParameters employeeResourceParameters)
         {
             var query = _context.Employees.AsQueryable();
 
@@ -67,7 +67,7 @@ namespace StaySphere.Services
             return new PaginatedList<EmployeeDto>(employeeDtos, employees.TotalCount, employees.CurrentPage, employees.PageSize);
         }
 
-        public async Task<EmployeeDto?> GetEmployeeById(int id)
+        public async Task<EmployeeDto?> GetEmployeeByIdAsync(int id)
         {
             var employees = await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -80,7 +80,7 @@ namespace StaySphere.Services
             return employeeDto;
         }
 
-        public async Task<EmployeeDto> CreateEmployee(EmployeeForCreateDto employeeForCreateDto)
+        public async Task<EmployeeDto> CreateEmployeeAsync(EmployeeForCreateDto employeeForCreateDto)
         {
             var employeeEntity = _mapper.Map<Employee>(employeeForCreateDto);
 
@@ -91,7 +91,7 @@ namespace StaySphere.Services
             return employeeDto;
         }
 
-        public async Task UpdateEmployee(EmployeeForUpdateDto employeeForUpdateDto)
+        public async Task UpdateEmployeeAsync(EmployeeForUpdateDto employeeForUpdateDto)
         {
             var employeeEntity = _mapper.Map<Employee>(employeeForUpdateDto);
 
@@ -99,7 +99,7 @@ namespace StaySphere.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteEmployee(int id)
+        public async Task DeleteEmployeeAsync(int id)
         {
             var employee = await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
 

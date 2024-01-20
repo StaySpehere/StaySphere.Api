@@ -18,47 +18,43 @@ namespace StaySphere.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<GuestDto>> GetGuestAsync(
+        public async Task<ActionResult<IEnumerable<GuestDto>>> GetGuestAsync(
                [FromQuery] GuestResourceParameters guestResourceParameters)
         {
-            var guests = _guestService.GetGuests(guestResourceParameters);
-
+            var guests = await _guestService.GetGuestsAsync(guestResourceParameters);
             return Ok(guests);
         }
         [HttpGet("{id}", Name = "GetGuestById")]
-        public ActionResult<GuestDto> Get(int id)
+        public async Task<ActionResult<GuestDto>> Get(int id)
         {
-            var guest = _guestService.GetGuestById(id);
-
+            var guest = await _guestService.GetGuestByIdAsync(id);
             return Ok(guest);
 
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] GuestForCreateDto guest)
+        public async Task<ActionResult> Post([FromBody] GuestForCreateDto guest)
         {
-            _guestService.CreateGuest(guest);
-
-            return NoContent();
+           await _guestService.CreateGuestAsync(guest);
+           return NoContent();
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] GuestForUpdateDto guest)
+        public async Task<ActionResult> Put(int id, [FromBody] GuestForUpdateDto guest)
         {
             if (id != guest.Id)
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {guest.Id}.");
             }
-            _guestService.UpdateGuest(guest);
 
+            await _guestService.UpdateGuestAsync(guest);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _guestService.DeleteGuest(id);
-
+           await _guestService.DeleteGuestAsync(id);
             return NoContent();
         }
     }

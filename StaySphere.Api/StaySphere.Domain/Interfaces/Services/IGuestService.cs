@@ -6,10 +6,10 @@ namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IGuestService
     {
-        Task<PaginatedList<GuestDto>> GetGuests(GuestResourceParameters guestResourceParameters);
-        Task<GuestDto?> GetGuestById(int id);
-        Task<GuestDto> CreateGuest(GuestForCreateDto guestForCreateDto);
-        Task UpdateGuest(GuestForUpdateDto guestForUpdateDto);
-        Task DeleteGuest(int id);
+        Task<PaginatedList<GuestDto>> GetGuestsAsync(GuestResourceParameters guestResourceParameters);
+        Task<GuestDto?> GetGuestByIdAsync(int id);
+        Task<GuestDto> CreateGuestAsync(GuestForCreateDto guestForCreateDto);
+        Task UpdateGuestAsync(GuestForUpdateDto guestForUpdateDto);
+        Task DeleteGuestAsync(int id);
     }
 }

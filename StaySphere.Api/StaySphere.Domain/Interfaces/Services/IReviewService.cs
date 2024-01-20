@@ -6,10 +6,10 @@ namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IReviewService
     {
-        Task<PaginatedList<ReviewDto>> GetReviews(ReviewResourceParameters reviewResourceParameters);
-        Task<ReviewDto?> GetReviewById(int id);
-        Task<ReviewDto> CreateReview(ReviewForCreateDto reviewForCreateDto);
-        Task UpdateReview(ReviewForUpdateDto reviewForUpdateDto);
-        Task DeleteReview(int id);
+        Task<PaginatedList<ReviewDto>> GetReviewsAsync(ReviewResourceParameters reviewResourceParameters);
+        Task<ReviewDto?> GetReviewByIdAsync(int id);
+        Task<ReviewDto> CreateReviewAsync(ReviewForCreateDto reviewForCreateDto);
+        Task UpdateReviewAsync(ReviewForUpdateDto reviewForUpdateDto);
+        Task DeleteReviewAsync(int id);
     }
 }
