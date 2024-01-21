@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using System.Text.Json;
 
 namespace StaySphere.Api.Controllers
 {
@@ -19,9 +21,14 @@ namespace StaySphere.Api.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(
-               [FromQuery] CategoryResourceParameters parameters)
+               [FromQuery] CategoryResourceParameters categoryResourceParameters)
         {
-            var categories = await _categoryService.GetCategoriesAsync(parameters);
+            var categories = await _categoryService.GetCategoriesAsync(categoryResourceParameters);
+
+            var metaData = GetPaginationMetaData(categories);
+
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
+
             return Ok(categories);
         }
 
@@ -46,8 +53,8 @@ namespace StaySphere.Api.Controllers
             {
                 return BadRequest($"Route id: {id} does not match with parameter id: {category.Id}.");
             }
-           await _categoryService.UpdateCategoryAsync(category);
-           return NoContent();
+            await _categoryService.UpdateCategoryAsync(category);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
@@ -55,6 +62,16 @@ namespace StaySphere.Api.Controllers
         {
             await _categoryService.DeleteCategoryAsync(id);
             return NoContent();
+        }
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<CategoryDto> categoryDtos)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = categoryDtos.TotalCount,
+                PageSize = categoryDtos.PageSize,
+                CurrentPage = categoryDtos.CurrentPage,
+                TotalPages = categoryDtos.TotalPages,
+            };
         }
     }
 }

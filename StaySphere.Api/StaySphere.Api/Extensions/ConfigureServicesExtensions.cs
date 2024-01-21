@@ -4,6 +4,7 @@ using StaySphere.Domain.Interfaces.Repositories;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Infrastructure.Persistence;
 using StaySphere.Infrastructure.Persistence.Repositories;
+using StaySphere.Services;
 
 namespace StaySphere.Api.Extensions
 {
@@ -11,19 +12,24 @@ namespace StaySphere.Api.Extensions
     {
         public static IServiceCollection ConfigureRepositories(this IServiceCollection services)
         {
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IBookingRepository, BookingRepository>();
-            services.AddScoped<IDocumentRepository, DocumentRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<IGuestRepository, GuestRepository>();
-            services.AddScoped<IPositionRepository, PositionRepository>();
-            services.AddScoped<IReviewRepository, ReviewRepository>();
-            services.AddScoped<IRoomRepository, RoomRepository>();
-       
+            services.AddScoped<ICommonRepository, CommonRepository>();
+            
             return services;
         }
 
+        public static IServiceCollection ConfigureServices(this IServiceCollection services)
+        {
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IGuestService, GuestService>();
+            services.AddScoped<IPositionService, PositionService>();
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IRoomService, RoomService>();
 
+            return services;
+        }
         public static IServiceCollection ConfigureLogger(this IServiceCollection services)
         {
             Log.Logger = new LoggerConfiguration()
