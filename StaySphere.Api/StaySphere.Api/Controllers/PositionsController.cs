@@ -1,9 +1,13 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.DTOs.Position;
+using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using System.Text.Json;
 
 namespace StaySphere.Api.Controllers
 {
@@ -23,6 +27,10 @@ namespace StaySphere.Api.Controllers
               [FromQuery] PositionResourceParameters positionResourceParameters)
         {
             var positions = await _positionService.GetPositionsAsync(positionResourceParameters);
+
+            var metaData = await GetPaginationMetaDataAsync(positions);
+
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
             return Ok(positions);
         }
         [HttpGet("{id}", Name = "GetPositionById")]
@@ -56,6 +64,16 @@ namespace StaySphere.Api.Controllers
         {
             await _positionService.DeletePositionAsync(id);
             return NoContent();
+        }
+        private async Task<PagenationMetaData> GetPaginationMetaDataAsync(PaginatedList<PositionDto> positionDtos)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = positionDtos.TotalCount,
+                PageSize = positionDtos.PageSize,
+                CurrentPage = positionDtos.CurrentPage,
+                TotalPages = positionDtos.TotalPages,
+            };
         }
     }
 }
