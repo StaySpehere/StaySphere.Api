@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.DTOs.Employee;
+using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using System.Text.Json;
 
 namespace StaySphere.Api.Controllers
 {
@@ -22,6 +26,10 @@ namespace StaySphere.Api.Controllers
               [FromQuery] EmployeeResourceParameters employeeResourceParameters)
         {
             var employees = await _employeeService.GetEmployeesAsync(employeeResourceParameters);
+
+            var metaData = await GetPaginationMetaDataAsync(employees);
+
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(employees);
         }
@@ -57,6 +65,16 @@ namespace StaySphere.Api.Controllers
         {
             await _employeeService.DeleteEmployeeAsync(id);
             return NoContent();
+        }
+        private async Task<PagenationMetaData> GetPaginationMetaDataAsync(PaginatedList<EmployeeDto> employeeDtos)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = employeeDtos.TotalCount,
+                PageSize = employeeDtos.PageSize,
+                CurrentPage = employeeDtos.CurrentPage,
+                TotalPages = employeeDtos.TotalPages,
+            };
         }
     }
 }
