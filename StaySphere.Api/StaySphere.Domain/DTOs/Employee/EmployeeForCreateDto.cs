@@ -1,8 +1,7 @@
 ﻿namespace StaySphere.Domain.DTOs.Employee
 {
     public record EmployeeForCreateDto(
-        string Name,
+        string FirstName,
         int PositionId,
         decimal Salary);
-
 }

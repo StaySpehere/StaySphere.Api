@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.DTOs.Guest;
-using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
@@ -43,8 +41,8 @@ namespace StaySphere.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] GuestForCreateDto guest)
         {
-           await _guestService.CreateGuestAsync(guest);
-           return NoContent();
+            await _guestService.CreateGuestAsync(guest);
+            return NoContent();
         }
 
         [HttpPut("{id}")]
@@ -62,7 +60,7 @@ namespace StaySphere.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-           await _guestService.DeleteGuestAsync(id);
+            await _guestService.DeleteGuestAsync(id);
             return NoContent();
         }
         private async Task<PagenationMetaData> GetPaginationMetaDataAsync(PaginatedList<GuestDto> guestDtos)

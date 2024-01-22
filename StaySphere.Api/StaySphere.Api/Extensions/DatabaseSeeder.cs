@@ -22,7 +22,6 @@ namespace StaySphere.Api.Extensions
             CreatReviews(context);
             CreatPositions(context);
         }
-
         private static void CreatEmployees(StaySphereDbContext context)
         {
             if (context.Employees.Any()) return;

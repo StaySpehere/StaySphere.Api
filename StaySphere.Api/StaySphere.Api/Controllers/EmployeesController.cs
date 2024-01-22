@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.DTOs.Employee;
-using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;

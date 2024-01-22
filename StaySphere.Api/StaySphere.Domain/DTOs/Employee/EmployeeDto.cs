@@ -6,7 +6,7 @@ namespace StaySphere.Domain.DTOs.Employee
         int Id,
         int PositionId,
         string FullName,
-        int PhoneNumber,
+        string PhoneNumber,
         decimal Salary,
         ICollection<BookingDto> Bookings);
 }

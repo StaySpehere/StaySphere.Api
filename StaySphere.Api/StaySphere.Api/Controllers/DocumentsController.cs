@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.DTOs.Document;
-using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
@@ -44,7 +42,7 @@ namespace StaySphere.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] DocumentForCreateDto document)
         {
-            await  _documentService.CreateDocumentAsync(document);
+            await _documentService.CreateDocumentAsync(document);
             return StatusCode(201);
         }
 
@@ -63,7 +61,7 @@ namespace StaySphere.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-           await _documentService.DeleteDocumentAsync(id);
+            await _documentService.DeleteDocumentAsync(id);
 
             return NoContent();
         }

@@ -1,9 +1,6 @@
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.DTOs.Review;
-using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
@@ -44,7 +41,7 @@ namespace StaySphere.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ReviewForCreateDto review)
         {
-           await _reviewService.CreateReviewAsync(review);
+            await _reviewService.CreateReviewAsync(review);
             return StatusCode(201);
         }
 
@@ -63,8 +60,8 @@ namespace StaySphere.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-           await _reviewService.DeleteReviewAsync(id);
-           return NoContent();
+            await _reviewService.DeleteReviewAsync(id);
+            return NoContent();
         }
         private async Task<PagenationMetaData> GetPaginationMetaDataAsync(PaginatedList<ReviewDto> reviewDtos)
         {

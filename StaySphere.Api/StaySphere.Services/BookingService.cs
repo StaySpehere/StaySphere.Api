@@ -60,7 +60,7 @@ namespace StaySphere.Services
                     "CheckOutDatedesc" => query.OrderByDescending(x => x.CheckOutDate),
                     "TotalPrice" => query.OrderBy(x => x.TotalPrice),
                     "TotalPricedesc" => query.OrderByDescending(x => x.TotalPrice),
-                    _ => query.OrderBy(x => x.TotalPrice)
+                    _ => query.OrderBy(x => x.Id)
                 };
             }
 
