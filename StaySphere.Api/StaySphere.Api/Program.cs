@@ -7,7 +7,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Host.UseSerilog();
+builder.Host.UseSerilog();
 
 builder.Services.AddControllers()
     .AddNewtonsoftJson()

@@ -8,8 +8,9 @@ namespace StaySphere.Domain.Mappings
     {
         public DocumentMappings()
         {
-            CreateMap<Document,DocumentDto>()
-                .ForMember(x => x.FullName, r => r.MapFrom(x => x.FirstName + "" + x.LastName));
+            CreateMap<Document, DocumentDto>()
+                .ForCtorParam(nameof(DocumentDto.FullName),
+                    opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
             CreateMap<DocumentDto, Document>();
             CreateMap<DocumentForCreateDto, Document>();
             CreateMap<DocumentForUpdateDto, Document>();

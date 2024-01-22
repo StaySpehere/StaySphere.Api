@@ -1,9 +1,6 @@
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StaySphere.Domain.DTOs.Category;
 using StaySphere.Domain.DTOs.Room;
-using StaySphere.Domain.Entities;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
@@ -56,8 +53,8 @@ namespace StaySphere.Api.Controllers
                 return BadRequest($"Route id: {id} does not match with parameter id: {room.Id}.");
             }
 
-           await _roomService.UpdateRoomAsync(room);
-           return NoContent();
+            await _roomService.UpdateRoomAsync(room);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
