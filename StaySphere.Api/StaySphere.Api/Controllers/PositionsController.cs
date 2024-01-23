@@ -27,7 +27,7 @@ namespace StaySphere.Api.Controllers
         [HttpGet("{id}", Name = "GetPositionById")]
         public async Task<ActionResult<PositionDto>> Get(int id)
         {
-            var position = _positionService.GetPositionByIdAsync(id);
+            var position = await _positionService.GetPositionByIdAsync(id);
             return Ok(position);
         }
 
