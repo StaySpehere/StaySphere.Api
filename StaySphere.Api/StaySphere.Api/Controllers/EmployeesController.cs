@@ -22,7 +22,6 @@ namespace StaySphere.Api.Controllers
               [FromQuery] EmployeeResourceParameters employeeResourceParameters)
         {
             var employees = await _employeeService.GetEmployeesAsync(employeeResourceParameters);
-
             return Ok(employees);
         }
 
