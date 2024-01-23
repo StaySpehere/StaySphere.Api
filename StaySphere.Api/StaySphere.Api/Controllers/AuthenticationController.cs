@@ -16,7 +16,7 @@ namespace StaySphere.Api.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<string>> LoginAsync(LoginRequest request)
         {
-            var user = Authenticate(request.Login, request.Password);
+            var user = await AuthenticateAsync(request.Login, request.Password);
 
             if (user == null)
             {
@@ -28,8 +28,8 @@ namespace StaySphere.Api.Controllers
 
             var claimsForToken = new List<Claim>
             {
-                new Claim("sub", user.Phone),
-                new Claim("name", user.Name)
+                new Claim("sub", user?.Phone),
+                new Claim("name", user?.Name)
             };
 
             var jwtSecurityToken = new JwtSecurityToken(
@@ -42,18 +42,25 @@ namespace StaySphere.Api.Controllers
 
             var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
 
-            return await Task.FromResult(Ok(token));
+            return Ok(token);
         }
 
-        private static User Authenticate(string? login, string? password)
-        {
-            return new User
+        private async Task<User?> AuthenticateAsync(string? login, string? password)
+        { 
+            await Task.Delay(100);
+
+            if (login == "validuser" && password == "validpassword")
             {
-                Login = login,
-                Password = password,
-                Name = "Diyor",
-                Phone = "+99888888888"
-            };
+                return new User
+                {
+                    Login = login,
+                    Password = password,
+                    Name = "Diyor",
+                    Phone = "+99888888888"
+                };
+            }
+
+            return null;
         }
     }
 }
