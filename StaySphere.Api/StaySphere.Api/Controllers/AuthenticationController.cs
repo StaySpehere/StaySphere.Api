@@ -28,8 +28,8 @@ namespace StaySphere.Api.Controllers
 
             var claimsForToken = new List<Claim>
             {
-                new Claim("sub", user?.Phone),
-                new Claim("name", user?.Name)
+                new Claim("sub", user?.Phone ?? "+998949335203"),
+                new Claim("name", user?.Name ?? "Muhammadali")
             };
 
             var jwtSecurityToken = new JwtSecurityToken(
