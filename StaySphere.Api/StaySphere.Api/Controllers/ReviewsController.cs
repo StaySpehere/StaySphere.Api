@@ -41,8 +41,13 @@ namespace StaySphere.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ReviewForCreateDto review)
         {
+
+           await _reviewService.CreateReviewAsync(review);
+           return StatusCode(201);
+
             await _reviewService.CreateReviewAsync(review);
             return StatusCode(201);
+
         }
 
         [HttpPut("{id}")]

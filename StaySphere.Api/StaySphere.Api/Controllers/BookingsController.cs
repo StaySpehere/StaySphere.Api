@@ -14,6 +14,7 @@ namespace StaySphere.Api.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
+
         public BookingController(IBookingService bookingService)
         {
             _bookingService = bookingService;
@@ -21,7 +22,7 @@ namespace StaySphere.Api.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BookingDto>>> GetBookingsAsync(
-              [FromQuery] BookingResourceParameters bookingResourceParameters)
+            [FromQuery] BookingResourceParameters bookingResourceParameters)
         {
             var bookings = await _bookingService.GetBookingsAsync(bookingResourceParameters);
 
