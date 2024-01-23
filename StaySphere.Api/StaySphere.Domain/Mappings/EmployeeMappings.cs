@@ -8,8 +8,9 @@ namespace StaySphere.Domain.Mappings
     {
         public EmployeeMappings()
         {
-            CreateMap<Employee,EmployeeDto>()
-            .ForMember(x => x.FullName, r => r.MapFrom(x => x.FirstName + "" + x.LastName));
+            CreateMap<Employee, EmployeeDto>()
+                .ForCtorParam(nameof(EmployeeDto.FullName),
+                    opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
             CreateMap<EmployeeDto, Employee>();
             CreateMap<EmployeeForCreateDto, Employee>();
             CreateMap<EmployeeForUpdateDto, Employee>();

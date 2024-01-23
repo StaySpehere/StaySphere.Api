@@ -1,11 +1,12 @@
 ﻿using StaySphere.Domain.DTOs.Booking;
+using StaySphere.Domain.Entities;
 
 namespace StaySphere.Domain.DTOs.Guest
 {
     public record GuestDto(
         int Id,
         int DocumentId,
-        int PhoneNumber,
+        string PhoneNumber,
         string Email,
         ICollection<BookingDto> Bookings);
 }

@@ -4,5 +4,5 @@
         int Id,
         int BookingId,
         string Comment,
-        float Grade);
+        decimal Grade);
 }

@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Room;
 using StaySphere.Domain.Interfaces.Services;
+using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using System.Text.Json;
 
 namespace StaySphere.Api.Controllers
 {
@@ -22,6 +24,10 @@ namespace StaySphere.Api.Controllers
                [FromQuery] RoomResourceParameters roomResourceParameters)
         {
             var rooms = await _roomService.GetRoomsAsync(roomResourceParameters);
+
+            var metaData = await GetPaginationMetaDataAsync(rooms);
+
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
             return Ok(rooms);
         }
 
@@ -47,8 +53,8 @@ namespace StaySphere.Api.Controllers
                 return BadRequest($"Route id: {id} does not match with parameter id: {room.Id}.");
             }
 
-           await _roomService.UpdateRoomAsync(room);
-           return NoContent();
+            await _roomService.UpdateRoomAsync(room);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
@@ -56,6 +62,16 @@ namespace StaySphere.Api.Controllers
         {
             await _roomService.DeleteRoomAsync(id);
             return NoContent();
+        }
+        private async Task<PagenationMetaData> GetPaginationMetaDataAsync(PaginatedList<RoomDto> roomDtos)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = roomDtos.TotalCount,
+                PageSize = roomDtos.PageSize,
+                CurrentPage = roomDtos.CurrentPage,
+                TotalPages = roomDtos.TotalPages,
+            };
         }
     }
 }

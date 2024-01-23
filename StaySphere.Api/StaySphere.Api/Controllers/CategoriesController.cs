@@ -25,7 +25,7 @@ namespace StaySphere.Api.Controllers
         {
             var categories = await _categoryService.GetCategoriesAsync(categoryResourceParameters);
 
-            var metaData = GetPaginationMetaData(categories);
+            var metaData = await GetPaginationMetaDataAsync(categories);
 
             Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
@@ -63,7 +63,7 @@ namespace StaySphere.Api.Controllers
             await _categoryService.DeleteCategoryAsync(id);
             return NoContent();
         }
-        private PagenationMetaData GetPaginationMetaData(PaginatedList<CategoryDto> categoryDtos)
+        private async Task<PagenationMetaData> GetPaginationMetaDataAsync(PaginatedList<CategoryDto> categoryDtos)
         {
             return new PagenationMetaData
             {
