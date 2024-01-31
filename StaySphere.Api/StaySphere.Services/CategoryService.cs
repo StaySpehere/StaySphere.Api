@@ -6,6 +6,7 @@ using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using StaySphere.Domain.Responses;
 using StaySphere.Infrastructure.Persistence;
 
 namespace StaySphere.Services
@@ -22,7 +23,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<CategoryDto>> GetCategoriesAsync(CategoryResourceParameters categoryResourceParameters)
+        public async Task<GetCategoryResponse> GetCategoriesAsync(CategoryResourceParameters categoryResourceParameters)
         {
             var query = _context.Categories.AsQueryable();
 
@@ -56,7 +57,19 @@ namespace StaySphere.Services
             var categories = await query.ToPaginatedListAsync(categoryResourceParameters.PageSize, categoryResourceParameters.PageNumber);
             var categoryDtos = _mapper.Map<List<CategoryDto>>(categories);
 
-            return new PaginatedList<CategoryDto>(categoryDtos, categories.TotalCount, categories.CurrentPage, categories.PageSize);
+            var paginatedCategory = new PaginatedList<CategoryDto>(categoryDtos, categories.TotalCount, categories.CurrentPage, categories.PageSize);
+
+            var result = new GetCategoryResponse()
+            {
+                Data = paginatedCategory.ToList(),
+                HasNextPage = paginatedCategory.HasNext,
+                HasPreviousPage = paginatedCategory.HasPrevious,
+                PageNumber = paginatedCategory.CurrentPage,
+                PageSize = paginatedCategory.PageSize,
+                TotalPages = paginatedCategory.TotalPages
+            };
+
+            return result;
         }
         public async Task<CategoryDto?> GetCategoryByIdAsync(int id)
         {

@@ -2,9 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Review;
 using StaySphere.Domain.Interfaces.Services;
-using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
-using System.Text.Json;
 
 namespace StaySphere.Api.Controllers
 {
@@ -25,9 +23,6 @@ namespace StaySphere.Api.Controllers
         {
             var reviews = await _reviewService.GetReviewsAsync(reviewResourceParameters);
 
-            var metaData = await GetPaginationMetaDataAsync(reviews);
-
-            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
             return Ok(reviews);
         }
 
@@ -42,8 +37,8 @@ namespace StaySphere.Api.Controllers
         public async Task<ActionResult> Post([FromBody] ReviewForCreateDto review)
         {
 
-           await _reviewService.CreateReviewAsync(review);
-           return StatusCode(201);
+            await _reviewService.CreateReviewAsync(review);
+            return StatusCode(201);
 
             await _reviewService.CreateReviewAsync(review);
             return StatusCode(201);
@@ -67,16 +62,6 @@ namespace StaySphere.Api.Controllers
         {
             await _reviewService.DeleteReviewAsync(id);
             return NoContent();
-        }
-        private async Task<PagenationMetaData> GetPaginationMetaDataAsync(PaginatedList<ReviewDto> reviewDtos)
-        {
-            return new PagenationMetaData
-            {
-                Totalcount = reviewDtos.TotalCount,
-                PageSize = reviewDtos.PageSize,
-                CurrentPage = reviewDtos.CurrentPage,
-                TotalPages = reviewDtos.TotalPages,
-            };
         }
     }
 }

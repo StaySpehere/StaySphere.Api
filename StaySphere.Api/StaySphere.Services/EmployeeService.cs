@@ -6,6 +6,7 @@ using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using StaySphere.Domain.Responses;
 using StaySphere.Infrastructure.Persistence;
 
 namespace StaySphere.Services
@@ -21,7 +22,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<EmployeeDto>> GetEmployeesAsync(EmployeeResourceParameters employeeResourceParameters)
+        public async Task<GetEmployeeResponse> GetEmployeesAsync(EmployeeResourceParameters employeeResourceParameters)
         {
             var query = _context.Employees.AsQueryable();
 
@@ -64,7 +65,19 @@ namespace StaySphere.Services
             var employees = await query.ToPaginatedListAsync(employeeResourceParameters.PageSize, employeeResourceParameters.PageNumber);
             var employeeDtos = _mapper.Map<List<EmployeeDto>>(employees);
 
-            return new PaginatedList<EmployeeDto>(employeeDtos, employees.TotalCount, employees.CurrentPage, employees.PageSize);
+            var paginatedEmployees = new PaginatedList<EmployeeDto>(employeeDtos, employees.TotalCount, employees.CurrentPage, employees.PageSize);
+
+            var result = new GetEmployeeResponse()
+            {
+                Data = paginatedEmployees.ToList(),
+                HasNextPage = paginatedEmployees.HasNext,
+                HasPreviousPage = paginatedEmployees.HasPrevious,
+                PageNumber = paginatedEmployees.CurrentPage,
+                PageSize = paginatedEmployees.PageSize,
+                TotalPages = paginatedEmployees.TotalPages
+            };
+
+            return result;
         }
 
         public async Task<EmployeeDto?> GetEmployeeByIdAsync(int id)
