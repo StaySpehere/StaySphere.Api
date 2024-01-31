@@ -1,5 +1,4 @@
 ﻿using StaySphere.Domain.DTOs.Review;
-using StaySphere.Domain.Entities;
 
 namespace StaySphere.Domain.DTOs.Booking
 {

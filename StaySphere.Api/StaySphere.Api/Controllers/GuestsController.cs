@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StaySphere.Domain.DTOs.Guest;
 using StaySphere.Domain.Interfaces.Services;
-using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
-using System.Text.Json;
 
 namespace StaySphere.Api.Controllers
 {
@@ -25,9 +23,6 @@ namespace StaySphere.Api.Controllers
         {
             var guests = await _guestService.GetGuestsAsync(guestResourceParameters);
 
-            var metaData = await GetPaginationMetaDataAsync(guests);
-
-            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
             return Ok(guests);
         }
         [HttpGet("{id}", Name = "GetGuestById")]
@@ -62,16 +57,6 @@ namespace StaySphere.Api.Controllers
         {
             await _guestService.DeleteGuestAsync(id);
             return NoContent();
-        }
-        private async Task<PagenationMetaData> GetPaginationMetaDataAsync(PaginatedList<GuestDto> guestDtos)
-        {
-            return new PagenationMetaData
-            {
-                Totalcount = guestDtos.TotalCount,
-                PageSize = guestDtos.PageSize,
-                CurrentPage = guestDtos.CurrentPage,
-                TotalPages = guestDtos.TotalPages,
-            };
         }
     }
 }

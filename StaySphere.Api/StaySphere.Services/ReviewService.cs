@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using StaySphere.Domain.DTOs.Review;
 using StaySphere.Domain.Entities;
 using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using StaySphere.Domain.Responses;
 using StaySphere.Infrastructure.Persistence;
 
 namespace StaySphere.Services
@@ -23,7 +23,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<ReviewDto>> GetReviewsAsync(ReviewResourceParameters reviewResourceParameters)
+        public async Task<GetReviewResponse> GetReviewsAsync(ReviewResourceParameters reviewResourceParameters)
         {
             var query = _context.Reviews.AsQueryable();
 
@@ -64,7 +64,19 @@ namespace StaySphere.Services
             var reviews = await query.ToPaginatedListAsync(reviewResourceParameters.PageSize, reviewResourceParameters.PageNumber);
             var reviewsDtos = _mapper.Map<List<ReviewDto>>(reviews);
 
-            return new PaginatedList<ReviewDto>(reviewsDtos, reviews.TotalCount, reviews.CurrentPage, reviews.PageSize);
+            var paginatedReviews = new PaginatedList<ReviewDto>(reviewsDtos, reviews.TotalCount, reviews.CurrentPage, reviews.PageSize);
+
+            var result = new GetReviewResponse()
+            {
+                Data = paginatedReviews.ToList(),
+                HasNextPage = paginatedReviews.HasNext,
+                HasPreviousPage = paginatedReviews.HasPrevious,
+                PageNumber = paginatedReviews.CurrentPage,
+                PageSize = paginatedReviews.PageSize,
+                TotalPages = paginatedReviews.TotalPages
+            };
+
+            return result;
         }
 
         public async Task<ReviewDto?> GetReviewByIdAsync(int id)

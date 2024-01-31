@@ -1,12 +1,12 @@
 ﻿using StaySphere.Domain.DTOs.Employee;
-using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using StaySphere.Domain.Responses;
 
 namespace StaySphere.Domain.Interfaces.Services
 {
     public interface IEmployeeService
     {
-        Task<PaginatedList<EmployeeDto>> GetEmployeesAsync(EmployeeResourceParameters employeeResourceParameters);
+        Task<GetEmployeeResponse> GetEmployeesAsync(EmployeeResourceParameters employeeResourceParameters);
         Task<EmployeeDto?> GetEmployeeByIdAsync(int id);
         Task<EmployeeDto> CreateEmployeeAsync(EmployeeForCreateDto employeeForCreateDto);
         Task UpdateEmployeeAsync(EmployeeForUpdateDto employeeForUpdateDto);

@@ -5,6 +5,7 @@ using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using StaySphere.Domain.Responses;
 using StaySphere.Infrastructure.Persistence;
 using Document = StaySphere.Domain.Entities.Document;
 
@@ -21,7 +22,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<DocumentDto>> GetDocumentsAsync(DocumentResourceParameters documentResourceParameters)
+        public async Task<GetDocumentResponse> GetDocumentsAsync(DocumentResourceParameters documentResourceParameters)
         {
             var query = _context.Documents.AsQueryable();
 
@@ -46,7 +47,19 @@ namespace StaySphere.Services
             var documents = await query.ToPaginatedListAsync(documentResourceParameters.PageSize, documentResourceParameters.PageNumber);
             var documentDtos = _mapper.Map<List<DocumentDto>>(documents);
 
-            return new PaginatedList<DocumentDto>(documentDtos, documents.TotalCount, documents.CurrentPage, documents.PageSize);
+            var paginatedDocuments = new PaginatedList<DocumentDto>(documentDtos, documents.TotalCount, documents.CurrentPage, documents.PageSize);
+
+            var result = new GetDocumentResponse()
+            {
+                Data = paginatedDocuments.ToList(),
+                HasNextPage = paginatedDocuments.HasNext,
+                HasPreviousPage = paginatedDocuments.HasPrevious,
+                PageNumber = paginatedDocuments.CurrentPage,
+                PageSize = paginatedDocuments.PageSize,
+                TotalPages = paginatedDocuments.TotalPages
+            };
+
+            return result;
         }
 
         public async Task<DocumentDto?> GetDocumentByIdAsync(int id)

@@ -6,6 +6,7 @@ using StaySphere.Domain.Exeptions;
 using StaySphere.Domain.Interfaces.Services;
 using StaySphere.Domain.Pagination;
 using StaySphere.Domain.ResourceParameters;
+using StaySphere.Domain.Responses;
 using StaySphere.Infrastructure.Persistence;
 
 namespace StaySphere.Services
@@ -21,7 +22,7 @@ namespace StaySphere.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PaginatedList<GuestDto>> GetGuestsAsync(GuestResourceParameters guestResourceParameters)
+        public async Task<GetGuestResponse> GetGuestsAsync(GuestResourceParameters guestResourceParameters)
         {
             var query = _context.Guests.AsQueryable();
 
@@ -47,7 +48,19 @@ namespace StaySphere.Services
             var guests = await query.ToPaginatedListAsync(guestResourceParameters.PageSize, guestResourceParameters.PageNumber);
             var guestDtos = _mapper.Map<List<GuestDto>>(guests);
 
-            return new PaginatedList<GuestDto>(guestDtos, guests.TotalCount, guests.CurrentPage, guests.PageSize);
+            var paginatedGuests = new PaginatedList<GuestDto>(guestDtos, guests.TotalCount, guests.CurrentPage, guests.PageSize);
+
+            var result = new GetGuestResponse()
+            {
+                Data = paginatedGuests.ToList(),
+                HasNextPage = paginatedGuests.HasNext,
+                HasPreviousPage = paginatedGuests.HasPrevious,
+                PageNumber = paginatedGuests.CurrentPage,
+                PageSize = paginatedGuests.PageSize,
+                TotalPages = paginatedGuests.TotalPages
+            };
+
+            return result;
         }
 
         public async Task<GuestDto?> GetGuestByIdAsync(int id)
