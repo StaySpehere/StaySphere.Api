@@ -34,12 +34,12 @@ namespace StaySphere.Services
             {
                 query = roomResourceParameters.OrderBy.ToLowerInvariant() switch
                 {
-                    "Number" => query.OrderBy(x => x.Number),
-                    "Numberdesc" => query.OrderByDescending(x => x.Number),
-                    "Floor" => query.OrderBy(x => x.Floor),
-                    "Floordesc" => query.OrderByDescending(x => x.Floor),
-                    "categoryId" => query.OrderBy(x => x.CategoryId),
-                    "categoryIddesc" => query.OrderByDescending(x => x.CategoryId),
+                    "number" => query.OrderBy(x => x.Number),
+                    "numberdesc" => query.OrderByDescending(x => x.Number),
+                    "floor" => query.OrderBy(x => x.Floor),
+                    "floordesc" => query.OrderByDescending(x => x.Floor),
+                    "categoryid" => query.OrderBy(x => x.CategoryId),
+                    "categoryiddesc" => query.OrderByDescending(x => x.CategoryId),
                     _ => query.OrderBy(x => x.Floor)
                 };
             }

@@ -54,13 +54,13 @@ namespace StaySphere.Services
             {
                 query = bookingResourceParameters.OrderBy.ToLowerInvariant() switch
                 {
-                    "CheckInDate" => query.OrderBy(x => x.CheckInDate),
-                    "CheckInDatedesc" => query.OrderByDescending(x => x.CheckInDate),
-                    "CheckOutDate" => query.OrderBy(x => x.CheckOutDate),
-                    "CheckOutDatedesc" => query.OrderByDescending(x => x.CheckOutDate),
-                    "TotalPrice" => query.OrderBy(x => x.TotalPrice),
-                    "TotalPricedesc" => query.OrderByDescending(x => x.TotalPrice),
-                    _ => query.OrderBy(x => x.Id)
+                    "checkindate" => query.OrderBy(x => x.CheckInDate),
+                    "checkindatedesc" => query.OrderByDescending(x => x.CheckInDate),
+                    "checkoutdate" => query.OrderBy(x => x.CheckOutDate),
+                    "checkoutdatedesc" => query.OrderByDescending(x => x.CheckOutDate),
+                    "totalprice" => query.OrderBy(x => x.TotalPrice),
+                    "totalpricedesc" => query.OrderByDescending(x => x.TotalPrice),
+                    _ => query.OrderBy(x => x.TotalPrice)
                 };
             }
 
