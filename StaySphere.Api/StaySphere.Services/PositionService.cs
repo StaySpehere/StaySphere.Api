@@ -43,10 +43,10 @@ namespace StaySphere.Services
             {
                 query = positionResourceParameters.OrderBy.ToLowerInvariant() switch
                 {
-                    "Name" => query.OrderBy(x => x.Name),
-                    "Namedesc" => query.OrderByDescending(x => x.Name),
-                    "Salary" => query.OrderBy(x => x.Salary),
-                    "Salarydesc" => query.OrderByDescending(x => x.Salary),
+                    "name" => query.OrderBy(x => x.Name),
+                    "namedesc" => query.OrderByDescending(x => x.Name),
+                    "salary" => query.OrderBy(x => x.Salary),
+                    "salarydesc" => query.OrderByDescending(x => x.Salary),
                     _ => query.OrderBy(x => x.Name)
                 };
             }

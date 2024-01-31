@@ -51,12 +51,12 @@ namespace StaySphere.Services
             {
                 query = reviewResourceParameters.OrderBy.ToLowerInvariant() switch
                 {
-                    "BookindId" => query.OrderBy(x => x.BookingId),
-                    "BookindIddesc" => query.OrderByDescending(x => x.BookingId),
-                    "Comment" => query.OrderBy(x => x.Comment),
-                    "Commentdesc" => query.OrderByDescending(x => x.Comment),
-                    "Grade" => query.OrderBy(x => x.Grade),
-                    "Gradedesc" => query.OrderByDescending(x => x.Grade),
+                    "bookindid" => query.OrderBy(x => x.BookingId),
+                    "bookindiddesc" => query.OrderByDescending(x => x.BookingId),
+                    "comment" => query.OrderBy(x => x.Comment),
+                    "commentdesc" => query.OrderByDescending(x => x.Comment),
+                    "grade" => query.OrderBy(x => x.Grade),
+                    "gradedesc" => query.OrderByDescending(x => x.Grade),
                     _ => query.OrderBy(x => x.Grade)
                 };
             }

@@ -34,12 +34,12 @@ namespace StaySphere.Services
             {
                 query = guestResourceParameters.OrderBy.ToLowerInvariant() switch
                 {
-                    "PhoneNumber" => query.OrderBy(x => x.PhoneNumber),
-                    "PhoneNumberdesc" => query.OrderByDescending(x => x.PhoneNumber),
-                    "Email" => query.OrderBy(x => x.Email),
-                    "Emaildesc" => query.OrderByDescending(x => x.Email),
-                    "DocumentId" => query.OrderBy(x => x.DocumentId),
-                    "DocumentIddesc" => query.OrderByDescending(x => x.DocumentId),
+                    "phonenumber" => query.OrderBy(x => x.PhoneNumber),
+                    "phonenumberdesc" => query.OrderByDescending(x => x.PhoneNumber),
+                    "email" => query.OrderBy(x => x.Email),
+                    "emaildesc" => query.OrderByDescending(x => x.Email),
+                    "documentid" => query.OrderBy(x => x.DocumentId),
+                    "documentiddesc" => query.OrderByDescending(x => x.DocumentId),
                     _ => query.OrderBy(x => x.Email)
                 };
             }

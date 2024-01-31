@@ -29,16 +29,16 @@ namespace StaySphere.Services
             {
                 query = documentResourceParameters.OrderBy.ToLowerInvariant() switch
                 {
-                    "SerialNumber" => query.OrderBy(x => x.SerialNumber),
-                    "SerialNumberdesc" => query.OrderByDescending(x => x.SerialNumber),
-                    "FirstName" => query.OrderBy(x => x.FirstName),
-                    "FirstNamedesc" => query.OrderByDescending(x => x.FirstName),
-                    "LastName" => query.OrderBy(x => x.LastName),
-                    "LastNamedesc" => query.OrderByDescending(x => x.LastName),
-                    "BirthDate" => query.OrderBy(x => x.BirthDate),
-                    "BirthDatedesc" => query.OrderByDescending(x => x.BirthDate),
-                    "Gender" => query.OrderBy(x => x.Gender),
-                    "Genderdesc" => query.OrderByDescending(x => x.Gender),
+                    "serialnumber" => query.OrderBy(x => x.SerialNumber),
+                    "serialnumberdesc" => query.OrderByDescending(x => x.SerialNumber),
+                    "firstname" => query.OrderBy(x => x.FirstName),
+                    "firstnamedesc" => query.OrderByDescending(x => x.FirstName),
+                    "lastname" => query.OrderBy(x => x.LastName),
+                    "lastnamedesc" => query.OrderByDescending(x => x.LastName),
+                    "birthdate" => query.OrderBy(x => x.BirthDate),
+                    "birthdatedesc" => query.OrderByDescending(x => x.BirthDate),
+                    "gender" => query.OrderBy(x => x.Gender),
+                    "genderdesc" => query.OrderByDescending(x => x.Gender),
                     _ => query.OrderBy(x => x.SerialNumber)
                 };
             }
