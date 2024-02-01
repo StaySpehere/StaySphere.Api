@@ -10,7 +10,7 @@ namespace StaySphere.Domain.Mappings
         {
             CreateMap<Booking, BookingDto>()
                 .ForCtorParam(nameof(BookingDto.StayDuration),
-                    opt => opt.MapFrom(src => src.CheckOutDate - src.CheckInDate));
+                    opt => opt.MapFrom(src => src.CheckOutDate.Day - src.CheckInDate.Day));
             CreateMap<BookingDto, Booking>();
             CreateMap<BookingForCreateDto, Booking>();
             CreateMap<BookingForUpdateDto, Booking>();
