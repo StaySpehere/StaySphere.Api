@@ -31,6 +31,11 @@ namespace StaySphere.Services
                 query = query.Where(x => x.RoomId == bookingResourceParameters.RoomId);
             }
 
+            if (bookingResourceParameters.GuestId is not null)
+            {
+                query = query.Where(x => x.GuestId == bookingResourceParameters.GuestId);
+            }
+
             if (bookingResourceParameters.EmployeeId is not null)
             {
                 query = query.Where(x => x.EmployeeId == bookingResourceParameters.EmployeeId);

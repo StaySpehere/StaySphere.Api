@@ -6,7 +6,8 @@ namespace StaySphere.Domain.DTOs.Booking
         int Id,
         int GuestId,
         int EmployeeId,
-        DateTime StayDuration,
+        int RoomId,
+        int StayDuration,
         decimal TotalPrice,
         ICollection<ReviewDto> Reviews);
 }
